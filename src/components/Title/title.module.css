@@ -1,12 +1,12 @@
 .title {
   text-align: center;
+  padding: 2rem 0;
 }
 
 .titleText {
   font-family: var(--font-primary);
   font-size: 48px;
   font-weight: 400;
-  line-height: 2;
   letter-spacing: 0.02em;
 }
 
@@ -14,4 +14,14 @@
   color: var(--font-color-secondary);
   font-size: 24px;
   font-weight: 200;
+  margin-top: 0.8rem;
+}
+
+@media (max-width: 768px) {
+  .titleText {
+    font-size: 32px;
+  }
+  .subTitleText {
+    font-size: 20px;
+  }
 }
