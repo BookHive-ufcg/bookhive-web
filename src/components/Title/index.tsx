@@ -10,9 +10,9 @@ export default function Title({
   subTitleText: string;
 }) {
   return (
-    <div>
-      <h1>{titleText}</h1>
-      <h3>{subTitleText}</h3>
+    <div className={styles.title}>
+      <h1 className={styles.titleText}>{titleText}</h1>
+      <h3 className={styles.subTitleText}>{subTitleText}</h3>
     </div>
   );
 }
