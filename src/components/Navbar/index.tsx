@@ -15,10 +15,16 @@ export default function Navbar() {
       <Link href="/" className={pathname === "/" ? styles.active : undefined}>
         <FaHome className={styles.icon} />
       </Link>
-      <Link href="/books">
+      <Link
+        href="/reviews"
+        className={pathname === "/reviews" ? styles.active : undefined}
+      >
         <FaBook className={styles.icon} />
       </Link>
-      <Link href="/add-book">
+      <Link
+        href="/reviews/create"
+        className={pathname === "/reviews/create" ? styles.active : undefined}
+      >
         <FaPlus className={styles.icon} />
       </Link>
       <Link
