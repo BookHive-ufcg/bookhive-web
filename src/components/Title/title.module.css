@@ -1,0 +1,30 @@
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: var(--background-secondary);
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  border-top: 1px solid var(--background-tertiary);
+}
+
+.navbar a {
+  padding: 20px 0;
+  width: 20%;
+  display: flex;
+  justify-content: center;
+}
+
+.navbar a:hover {
+  background-color: var(--background-tertiary);
+}
+
+.icon {
+  color: #ffdd4b;
+  font-size: 24px;
+}
+
+.active {
+  background-color: var(--background-tertiary);
+}
