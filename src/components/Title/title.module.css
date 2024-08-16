@@ -1,103 +1,23 @@
 .title {
   text-align: center;
   padding: 2rem 0;
-}
-
-.titleText {
+ }
+ 
+ 
+ .titleText {
   font-family: var(--font-primary);
   font-size: 48px;
   font-weight: 400;
   letter-spacing: 0.02em;
-}
-
-.subTitleText {
+ }
+ 
+ 
+ .subTitleText {
   color: var(--font-color-secondary);
   font-size: 24px;
   font-weight: 200;
   margin-top: 0.8rem;
-}
-
-.bookSection h2 {
-  font-size: 1.5rem;
-  margin-bottom: 20px;
-  text-align: left;
-  margin-left: 20px; 
-}
-
-.bookList {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 30px;
-  overflow-x: auto; /* Para rolagem horizontal em telas menores */
-}
-
-.bookCard {
-  min-width: 250px;
-  width: 250px;
-  flex-shrink: 0;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(195, 194, 194, 0.1);
-  transition: transform 0.3s ease-in-out;
-}
-
-.bookCard img {
-  width: 100%; 
-  height: auto;
-  display: block;
-}
-
-.customText {
-  font-family: var(--font-primary);
-  font-size: 48px;
-  color: black;
-  margin-bottom: 20px;
-}
-
-/* Responsividade para telas menores que 1200px */
-@media (max-width: 1200px) {
-  .titleText {
-    font-size: 32px;
-  }
-  .subTitleText {
-    font-size: 20px;
-  }
-  .bookSection h2 {
-    font-size: 1.2rem;
-    margin-bottom: 15px;
-    margin-left: 10px;
-  }
-  .bookList {
-    flex-direction: column;
-    gap: 15px;
-    align-items: center;
-    padding: 0 10px;
-  }
-  .customText {
-    font-size: 32px;
-    margin-bottom: 15px;
-  }
-}
-
-/* Responsividade para telas menores que 480px */
-@media (max-width: 480px) {
-  .titleText {
-    font-size: 28px;
-  }
-  .subTitleText {
-    font-size: 18px;
-  }
-  .bookSection h2 {
-    font-size: 1rem;
-    margin-bottom: 10px;
-    margin-left: 5px;
-  }
-  .bookList {
-    padding: 0 5px;
-  }
-  .customText {
-    font-size: 28px;
-    margin-bottom: 10px;
-  }
-}
+ }
+ 
+ 
+ 

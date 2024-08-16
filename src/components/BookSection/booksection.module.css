@@ -1,39 +1,75 @@
-.bookSection {
-    padding: 20px;
+.bookSection h2 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  text-align: left;
+  margin-left: 20px;
+ }
+ 
+ 
+ .bookList {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  overflow-x: auto;
+ }
+ 
+ 
+ .bookCard {
+  min-width: 250px;
+  width: 250px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(195, 194, 194, 0.1);
+  transition: transform 0.3s ease-in-out;
+ }
+ 
+ 
+ .bookCard img {
+  width: 100%;
+  height: auto;
+  display: block;
+ }
+ 
+ 
+ @media (max-width: 1200px) {
+  .titleText {
+    font-size: 32px;
   }
-  
+  .subTitleText {
+    font-size: 20px;
+  }
   .bookSection h2 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    margin-left: 10px;
   }
-  
   .bookList {
-    display: flex;
-    gap: 20px;
-    overflow-x: auto;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    padding: 0 10px;
   }
-  
-  .bookCard {
-    min-width: 150px;
-    flex-shrink: 0;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease-in-out;
+ }
+ 
+ 
+ @media (max-width: 480px) {
+  .titleText {
+    font-size: 28px;
   }
-  
-  .bookCard img {
-    width: 100%;
-    height: auto;
-    display: block;
+  .subTitleText {
+    font-size: 18px;
   }
-  
-  .bookCard:hover {
-    transform: scale(1.05);
+  .bookSection h2 {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    margin-left: 5px;
   }
-  
-  .customText {
-    font-family: 'Metamorphus', sans-serif; 
-    font-size: 24px;
-    color: black;
+  .bookList {
+    padding: 0 5px;
   }
+ 
+ 
+ }
+ 
