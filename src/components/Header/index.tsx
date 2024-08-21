@@ -17,7 +17,11 @@ const Header = () => {
       {pathname !== "/" && (
         <Link href="/">
           <button className={styles.backButton}>
-            <img src="/img/seta-esq.png" alt="Back" className={styles.backIcon} />
+            <img
+              src="/img/seta-esq.png"
+              alt="Back"
+              className={styles.backIcon}
+            />
           </button>
         </Link>
       )}

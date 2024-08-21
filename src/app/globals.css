@@ -3,33 +3,27 @@
   --border-radius: 12px;
   --font-primary: "Metamorphous";
   --font-secondary: "Open Sans Hebrew";
- 
- 
+
   --font-color-secondary: #4a4545;
- 
- 
+
   --background-primary: #fffce0;
   --background-secondary: #ffffff;
   --background-tertiary: #e7e7e7;
- }
- 
- 
- * {
+}
+
+* {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
- }
- 
- 
- .icon {
+}
+
+.icon {
   color: #ffdd4b;
   font-size: 24px;
- }
- 
- 
- .customText {
-  font-family: 'Metamorphus', sans-serif;
+}
+
+.customText {
+  font-family: "Metamorphus", sans-serif;
   font-size: 24px;
   color: rgb(73, 73, 73);
- }
- 
+}

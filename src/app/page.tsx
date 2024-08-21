@@ -1,5 +1,3 @@
-
-
 import styles from "./page.module.css";
 import Title from "@/components/Title";
 
@@ -11,7 +9,6 @@ export default function Home() {
         subTitleText={"Discover more about book's world"}
       />
       <h1> sgsugysgs </h1>
- 
     </main>
   );
 }
