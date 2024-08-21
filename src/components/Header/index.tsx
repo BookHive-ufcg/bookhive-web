@@ -4,12 +4,21 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import styles from "./header.module.css";
 import Profile from "../Profile";
+import Image from "next/image";
 
 const Header = () => {
   const pathname = usePathname();
 
   const getTitle = () => {
-    return <img src="/img/logotipo.png" alt="Logo" className={styles.logo} />;
+    return (
+      <Image
+        src="/logo.svg"
+        width={90}
+        height={60}
+        alt="Logo"
+        className={styles.logo}
+      />
+    );
   };
 
   return (
@@ -17,11 +26,7 @@ const Header = () => {
       {pathname !== "/" && (
         <Link href="/">
           <button className={styles.backButton}>
-            <img
-              src="/img/seta-esq.png"
-              alt="Back"
-              className={styles.backIcon}
-            />
+            <Image src="/arrow.svg" alt="Back" width={40} height={40} />
           </button>
         </Link>
       )}

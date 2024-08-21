@@ -1,3 +1,3 @@
 export default function CreateReview() {
-  return <div></div>;
+  return <main></main>;
 }

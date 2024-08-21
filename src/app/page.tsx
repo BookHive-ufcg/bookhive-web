@@ -1,9 +1,8 @@
-import styles from "./page.module.css";
 import Title from "@/components/Title";
 
 export default function Home() {
   return (
-    <main className={styles.main}>
+    <main>
       <Title
         titleText="Welcome to Bookhive!"
         subTitleText={"Discover more about book's world"}
