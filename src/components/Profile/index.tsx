@@ -13,8 +13,8 @@ const Profile = () => {
         src={profilePicture}
         alt="Profile"
         className={styles.profilePicture}
-        width={30}
-        height={30}
+        width={Number.MAX_SAFE_INTEGER}
+        height={Number.MAX_SAFE_INTEGER}
       />
     </div>
   );
