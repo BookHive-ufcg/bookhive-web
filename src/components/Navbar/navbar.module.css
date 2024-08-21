@@ -21,7 +21,7 @@
 }
 
 .icon {
-  color: #ffdd4b;
+  color: var(--color-primary);
   font-size: 24px;
 }
 
