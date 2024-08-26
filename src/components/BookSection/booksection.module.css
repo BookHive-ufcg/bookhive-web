@@ -3,19 +3,17 @@
   margin-bottom: 20px;
   text-align: left;
   margin-left: 20px;
- }
- 
- 
- .bookList {
+}
+
+.bookList {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 30px;
   overflow-x: auto;
- }
- 
- 
- .bookCard {
+}
+
+.bookCard {
   min-width: 250px;
   width: 250px;
   flex-shrink: 0;
@@ -23,17 +21,15 @@
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(195, 194, 194, 0.1);
   transition: transform 0.3s ease-in-out;
- }
- 
- 
- .bookCard img {
+}
+
+.bookCard img {
   width: 100%;
   height: auto;
   display: block;
- }
- 
- 
- @media (max-width: 1200px) {
+}
+
+@media (max-width: 1200px) {
   .titleText {
     font-size: 32px;
   }
@@ -51,10 +47,9 @@
     align-items: center;
     padding: 0 10px;
   }
- }
- 
- 
- @media (max-width: 480px) {
+}
+
+@media (max-width: 480px) {
   .titleText {
     font-size: 28px;
   }
@@ -69,7 +64,4 @@
   .bookList {
     padding: 0 5px;
   }
- 
- 
- }
- 
+}

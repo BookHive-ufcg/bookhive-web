@@ -3,33 +3,39 @@
   --border-radius: 12px;
   --font-primary: "Metamorphous";
   --font-secondary: "Open Sans Hebrew";
- 
- 
+
   --font-color-secondary: #4a4545;
- 
- 
+
+  --color-primary: #ffdd4b;
+
   --background-primary: #fffce0;
   --background-secondary: #ffffff;
   --background-tertiary: #e7e7e7;
- }
- 
- 
- * {
+}
+
+* {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
- }
- 
- 
- .icon {
-  color: #ffdd4b;
-  font-size: 24px;
- }
- 
- 
- .customText {
-  font-family: 'Metamorphus', sans-serif;
-  font-size: 24px;
-  color: rgb(73, 73, 73);
- }
- 
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 100vh;
+
+  background: url("/favo-top-right.svg") top right,
+    url("/favo-bottom-left.svg") bottom left,
+    url("/two-bees.svg") top 30% right 25%,
+    url("/one-bee.svg") bottom 40% left 30%,
+    url("/one-bee.svg") bottom 15% right 15%,
+    linear-gradient(
+      to bottom,
+      var(--background-primary) 50%,
+      var(--background-secondary) 50%
+    );
+
+  background-repeat: no-repeat;
+}

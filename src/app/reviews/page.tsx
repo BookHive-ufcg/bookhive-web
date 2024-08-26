@@ -1,3 +1,3 @@
 export default function Reviews() {
-  return <div></div>;
+  return <main></main>;
 }
