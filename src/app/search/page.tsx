@@ -1,3 +1,9 @@
+import SearchBar from "@/components/SearchBar";
+
 export default function Search() {
-  return <main></main>;
+  return (
+    <main>
+      <SearchBar placeholder="Title, author or ISBN" />
+    </main>
+  );
 }
