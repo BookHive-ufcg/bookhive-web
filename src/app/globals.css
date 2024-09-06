@@ -7,10 +7,12 @@
   --font-color-secondary: #4a4545;
 
   --color-primary: #ffdd4b;
+  --color-grey: #555;
 
   --background-primary: #fffce0;
   --background-secondary: #ffffff;
   --background-tertiary: #e7e7e7;
+  --background-grey: #d3d3d3;
 }
 
 * {
