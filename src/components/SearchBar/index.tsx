@@ -1,15 +1,12 @@
 import { FiSearch } from "react-icons/fi";
-import styles from "./profile.module.css";
+import styles from "./search-bar.module.css";
 
 type SearchBarProps = {
   placeholder?: string;
-  width?: number;
+  width?: string;
 };
 
-export default function SearchBar({
-  placeholder,
-  width = 600,
-}: SearchBarProps) {
+export default function SearchBar({ placeholder, width }: SearchBarProps) {
   return (
     <div style={{ width }} className={styles.searchBar}>
       <FiSearch className={styles.icon} />
