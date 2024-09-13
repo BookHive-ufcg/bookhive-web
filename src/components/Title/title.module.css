@@ -4,7 +4,6 @@
 }
 
 .titleText {
-  font-family: var(--font-primary);
   font-size: 48px;
   font-weight: 400;
   letter-spacing: 0.02em;
