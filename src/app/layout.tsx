@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Metamorphous } from "next/font/google";
+import { Metamorphous } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Header from "@/components/Header";
