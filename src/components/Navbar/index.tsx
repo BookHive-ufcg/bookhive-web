@@ -10,6 +10,10 @@ import styles from "./navbar.module.css";
 export default function Navbar() {
   const pathname = usePathname();
 
+  if (pathname === "/login" || pathname === "/signup") {
+    return null;
+  }
+
   return (
     <nav className={styles.navbar}>
       <Link href="/" className={pathname === "/" ? styles.active : undefined}>
