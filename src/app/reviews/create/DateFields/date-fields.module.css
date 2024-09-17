@@ -1,0 +1,67 @@
+
+.dateFieldsContainer {
+    margin: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(195, 194, 194, 0.1);
+    position: absolute;
+    top: 150px; 
+    left: 20px; 
+    width: calc(100% - 40px); 
+  }
+  
+  .dateFieldGroup {
+    display: block; 
+    margin-bottom: 20px;
+  }
+  
+  .dateFieldLabel {
+    font-size: 24px;
+    font-weight: 200;
+    color: var(--font-color-secondary);
+    margin-top: 0.8rem;
+    display: block; 
+  }
+  
+  .dateFieldInput {
+    width: 30%;
+    padding: 10px;
+    border: 1px solid #ddd; 
+    border-radius: 4px;
+    font-size: 0.875rem;
+    background-color: #f5f5f5; 
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1); 
+    margin-top: 5px; 
+  }
+  
+  .dateFieldInput:focus {
+    border-color: #ccc; 
+    outline: none;
+  }
+  
+  .dateFieldInput::placeholder {
+    color: #aaa; 
+  }
+  
+  @media (max-width: 1200px) {
+    .dateFieldsContainer {
+      padding: 15px;
+      top: 130px; 
+    }
+  
+    .dateFieldInput {
+      font-size: 0.8rem; 
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .dateFieldsContainer {
+      padding: 10px;
+      top: 100px; 
+    }
+  
+    .dateFieldInput {
+      font-size: 0.75rem; 
+    }
+  }
+  
