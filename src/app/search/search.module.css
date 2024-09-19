@@ -1,4 +1,37 @@
 .searchBarContainer {
   margin-top: 2rem;
   width: 70%;
+  padding-bottom: 8rem;
+}
+
+.title {
+  text-align: center;
+  margin: 4rem 0;
+}
+
+.genresList {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4rem 0;
+  justify-content: space-around;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .genresList {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.genreItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.genreItem a {
+  text-decoration: none;
+  color: inherit;
 }
