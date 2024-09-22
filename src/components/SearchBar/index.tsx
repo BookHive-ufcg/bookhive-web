@@ -3,14 +3,13 @@ import styles from "./search-bar.module.css";
 
 type SearchBarProps = {
   placeholder?: string;
-  width?: string;
 };
 
-export default function SearchBar({ placeholder, width }: SearchBarProps) {
+export default function SearchBar({ placeholder }: SearchBarProps) {
   return (
-    <div style={{ width }} className={styles.searchBar}>
+    <div className={styles.searchBar}>
       <FiSearch className={styles.icon} />
-      <input type="text" placeholder={placeholder} className={styles.input} />
+      <input type="search" placeholder={placeholder} className={styles.input} />
     </div>
   );
 }
