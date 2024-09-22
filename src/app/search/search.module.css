@@ -7,6 +7,8 @@
 .title {
   text-align: center;
   margin: 4rem 0;
+  font-size: 3rem;
+  font-weight: 400;
 }
 
 .genresList {
@@ -15,6 +17,7 @@
   gap: 4rem 0;
   justify-content: space-around;
   text-align: center;
+  margin-bottom: 8rem;
 }
 
 @media (max-width: 768px) {
@@ -34,4 +37,19 @@
 .genreItem a {
   text-decoration: none;
   color: inherit;
+}
+
+.genreName {
+  font-size: 1.3rem;
+}
+
+.emotionSearchContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 20rem;
+}
+
+.emotionSearchContainer div {
+  width: min(40rem, 100%);
 }

@@ -18,7 +18,7 @@ export default function Search() {
   return (
     <main>
       <div className={styles.searchBarContainer}>
-        <SearchBar placeholder="Title, author or ISBN" width="100%" />
+        <SearchBar placeholder="Title, author or ISBN" />
         <h1 className={styles.title}>Explore popular genres</h1>
 
         <ul className={styles.genresList}>
@@ -27,15 +27,22 @@ export default function Search() {
               <Link href="#">
                 <Image
                   src={`/img/genres/${genre}.png`}
-                  alt="Biography"
+                  alt={genre}
                   width={165}
                   height={213}
                 />
-                <p>{genre}</p>
+                <p className={styles.genreName}>{genre}</p>
               </Link>
             </li>
           ))}
         </ul>
+
+        <hr />
+
+        <h1 className={styles.title}>Search books by emotion</h1>
+        <div className={styles.emotionSearchContainer}>
+          <SearchBar placeholder="Type your emotion" />
+        </div>
       </div>
     </main>
   );
