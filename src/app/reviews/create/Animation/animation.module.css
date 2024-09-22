@@ -1,0 +1,137 @@
+/* animation.module.css */
+
+.columnComponents{
+  display: flex;
+  flex-direction: column;
+}
+
+.nameContainer {
+  display: flex;
+  justify-content: center;
+  color: var(--font-color-secondary);
+  margin: 20px;
+  padding: 20px;
+  position: absolute;
+  top: 200px;
+  right: 320px;
+}
+.radioContainer {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-direction: row-reverse;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(195, 194, 194, 0.1);
+  position: absolute;
+  top: 250px;
+  right: 300px;
+  width: 200px;
+  height: 200px;
+  
+}
+.yellow {
+  filter: drop-shadow(0 0 15px rgba(255, 158, 11, 0.9)); /* Efeito de sombra amarela */
+}
+
+.radioInput {
+  position: absolute;
+  appearance: none;
+}
+
+.radioLabel {
+  cursor: pointer;
+  font-size: 30px;
+  position: relative;
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.radioLabelImage {
+  transition: filter 0.3s ease;
+  width: 50px; /* Ajuste o tamanho conforme necessário */
+  height: 40px; /* Ajuste o tamanho conforme necessário */
+}
+
+.radioLabel::before,
+.radioLabel::after {
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background-color: #ff9e0b;
+  border-radius: 50%;
+  opacity: 0;
+  transform: scale(0);
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  animation: particle-explosion 1s ease-out;
+}
+
+.radioLabel::before {
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%) scale(0);
+}
+
+.radioLabel::after {
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%) scale(0);
+}
+
+.radioLabel:hover::before,
+.radioLabel:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) scale(1.5);
+}
+
+.radioLabel:hover {
+  transform: scale(1.2);
+  animation: pulse 0.6s infinite alternate;
+}
+
+.radioLabel:hover img,
+.radioLabel:hover ~ .radioLabel img {
+  filter: drop-shadow(0 0 15px rgba(255, 158, 11, 0.9));
+  animation: shimmer 1s ease infinite alternate;
+}
+
+.radioInput:checked + .radioLabel img,
+.radioInput:checked + .radioLabel ~ .radioLabel img {
+  filter: drop-shadow(0 0 15px rgba(255, 158, 11, 0.9));
+  animation: pulse 0.8s infinite alternate;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes particle-explosion {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    filter: drop-shadow(0 0 10px rgba(255, 158, 11, 0.5));
+  }
+  100% {
+    filter: drop-shadow(0 0 20px rgba(255, 158, 11, 1));
+  }
+}
