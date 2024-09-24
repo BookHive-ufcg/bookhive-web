@@ -5,15 +5,15 @@ import { useRouter } from "next/navigation";
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
-  const isLoggedIn = (globalThis as unknown as CustomGlobalThis).isLoggedIn;
+  let isLoggedIn = false;
+
+  if (typeof window !== "undefined") {
+    isLoggedIn = window.localStorage["isLoggedIn"] === "true";
+  }
 
   useEffect(() => {
     const path = window.location.pathname;
-    if (
-      !(globalThis as unknown as CustomGlobalThis).isLoggedIn &&
-      path !== "/login" &&
-      path !== "/signup"
-    ) {
+    if (!isLoggedIn && path !== "/login" && path !== "/signup") {
       router.push("/login");
     }
   }, [isLoggedIn, router]);

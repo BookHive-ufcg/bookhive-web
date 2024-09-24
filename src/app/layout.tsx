@@ -15,8 +15,11 @@ export const metadata: Metadata = {
   description: "Book Hive is a platform for book lovers",
 };
 
-if (!(globalThis as unknown as CustomGlobalThis).isLoggedIn) {
-  (globalThis as unknown as CustomGlobalThis).isLoggedIn = false;
+if (
+  typeof window !== "undefined" &&
+  typeof window.localStorage["isLoggedIn"] === "undefined"
+) {
+  window.localStorage["isLoggedIn"] = false;
 }
 
 export default function RootLayout({

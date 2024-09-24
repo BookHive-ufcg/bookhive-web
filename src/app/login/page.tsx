@@ -28,7 +28,7 @@ export default function Login() {
 
     if (result?.ok) {
       router.push("/");
-      (globalThis as unknown as CustomGlobalThis).isLoggedIn = true;
+      window.localStorage["isLoggedIn"] = true;
     } else {
       setError("Login failed");
     }
