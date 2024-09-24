@@ -1,6 +1,8 @@
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
+const url = process.env.BACK_END_URL || 'http://localhost:8080';
+
 const handler = NextAuth({
   providers: [
     CredentialsProvider({
@@ -10,8 +12,19 @@ const handler = NextAuth({
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
-        // Simulação de um usuário
-        const user = { id: "1", name: 'User', username: 'user', password: 'password' };
+        // TODO: Admin user, remove this
+        const admin = { id: "1", name: 'User', username: 'admin', password: 'admin' };
+        if (credentials?.username === admin.username && credentials?.password === admin.password) {
+          return admin;
+        }
+
+        const response = await fetch(`${url}/user/${credentials?.username}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        const user = await response.json();
 
         if (credentials?.username === user.username && credentials?.password === user.password) {
           return user;
