@@ -1,7 +1,7 @@
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
-const url = process.env.BACK_END_URL || 'http://localhost:8080';
+const url = 'http://localhost:8080';
 
 const handler = NextAuth({
   providers: [

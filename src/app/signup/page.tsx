@@ -6,7 +6,7 @@ import Button from "@/components/Button";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-const url = process.env.BACK_END_URL || "http://localhost:8080";
+const url = "http://localhost:8080";
 
 export default function Signup() {
   const [loading, setLoading] = useState(false);
