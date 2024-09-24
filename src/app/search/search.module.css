@@ -50,6 +50,18 @@
   padding-bottom: 20rem;
 }
 
-.emotionSearchContainer div {
-  width: min(40rem, 100%);
+.emotionSearchContainer form {
+  width: min(50rem, 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.buttonContainer button {
+  width: min(20rem, 100%);
 }
