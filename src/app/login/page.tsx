@@ -1,11 +1,41 @@
+"use client";
+
 import styles from "./login.module.css";
 
 import Input from "@/components/Input";
 import Button from "@/components/Button";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 export default function Login() {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setLoading(true);
+    setError(null);
+
+    const result = await signIn("credentials", {
+      redirect: false,
+      username: event.currentTarget.username.value,
+      password: event.currentTarget.password.value,
+    });
+
+    if (result?.ok) {
+      router.push("/");
+      (globalThis as unknown as CustomGlobalThis).isLoggedIn = true;
+    } else {
+      setError("Login failed");
+    }
+
+    setLoading(false);
+  };
+
   return (
     <main>
       <div className={styles.container}>
@@ -27,21 +57,25 @@ export default function Login() {
           <div className={styles.rightContent}>
             <h1 className={styles.title}>Sign in to BookHive</h1>
             <p className={styles.subTitle}>Use your username and password</p>
-            <form className={styles.form}>
+            <form onSubmit={handleSubmit} className={styles.form}>
               <div className={styles.formGroup}>
                 <Input
                   type="text"
                   id="username"
+                  name="username"
                   placeholder="Username"
                   label="Username"
+                  required
                 />
               </div>
               <div className={styles.formGroup}>
                 <Input
                   type="password"
                   id="password"
+                  name="password"
                   placeholder="Password"
                   label="Password"
+                  required
                 />
               </div>
 
@@ -49,7 +83,10 @@ export default function Login() {
                 Forgot your password?
               </a>
 
-              <Button className={styles.button}>Login</Button>
+              <Button type="submit" className={styles.button}>
+                {loading ? "Logging in..." : "Login"}
+              </Button>
+              {error && <p style={{ color: "red" }}>{error}</p>}
             </form>
 
             <div className={styles.separator}>

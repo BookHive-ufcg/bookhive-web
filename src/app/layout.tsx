@@ -3,6 +3,7 @@ import { Metamorphous } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Header from "@/components/Header";
+import AuthProvider from "@/components/AuthProvider";
 
 const metamorphous = Metamorphous({
   subsets: ["latin"],
@@ -14,6 +15,10 @@ export const metadata: Metadata = {
   description: "Book Hive is a platform for book lovers",
 };
 
+if (!(globalThis as unknown as CustomGlobalThis).isLoggedIn) {
+  (globalThis as unknown as CustomGlobalThis).isLoggedIn = false;
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -22,9 +27,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={metamorphous.className}>
       <body>
-        <Header />
-        {children}
-        <Navbar />
+        <AuthProvider>
+          <Header />
+          {children}
+          <Navbar />
+        </AuthProvider>
       </body>
     </html>
   );
