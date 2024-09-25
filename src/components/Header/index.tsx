@@ -31,7 +31,9 @@ const Header = () => {
         alt="Logo"
         className={styles.logo}
       />
-      {pathname !== "/login" && pathname !== "/signup" && <Profile />}
+      {pathname !== "/login" && pathname !== "/signup" && (
+        <Profile size={"small"} />
+      )}
       {(pathname === "/login" || pathname === "/signup") && <div />}
     </header>
   );
