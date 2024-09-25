@@ -8,7 +8,12 @@ import { useRouter } from "next/navigation";
 
 const Header = () => {
   const pathname = usePathname();
+
   const router = useRouter() ?? null;
+
+  if (pathname === "/login") {
+    return null;
+  }
 
   return (
     <header className={styles.header}>
