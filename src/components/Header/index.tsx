@@ -7,6 +7,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 const Header = () => {
+  
   const pathname = usePathname();
 
   const router = useRouter() ?? null;
