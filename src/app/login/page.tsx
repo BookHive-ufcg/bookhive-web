@@ -8,29 +8,55 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { signIn } from "next-auth/react";
+
+const url = process.env.BACK_END_URL || "http://localhost:8080";
 
 export default function Login() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
+  if (window.localStorage["isLoggedIn"] === "true") {
+    router.push("/");
+    return null;
+  }
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true);
     setError(null);
 
-    const result = await signIn("credentials", {
-      redirect: false,
-      username: event.currentTarget.username.value,
-      password: event.currentTarget.password.value,
+    const formData = new FormData(event.currentTarget);
+    const username = formData.get("username") as string;
+    const password = formData.get("password") as string;
+
+    // TODO: REMOVE THIS
+    if (username === "admin" && password === "admin") {
+      router.push("/");
+      window.localStorage["isLoggedIn"] = true;
+      return;
+    }
+    // -----------------
+
+    const response = await fetch(`${url}/user/${username}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
 
-    if (result?.ok) {
+    if (response.status === 404) {
+      setError("User not found");
+      setLoading(false);
+      return;
+    }
+    const result = await response.json();
+
+    if (result.username === username && result.password === password) {
       router.push("/");
       window.localStorage["isLoggedIn"] = true;
     } else {
-      setError("Login failed");
+      setError("Password is incorrect");
     }
 
     setLoading(false);

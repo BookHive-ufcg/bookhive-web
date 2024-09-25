@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 import { useRouter } from "next/navigation";
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+  const path = window.location.pathname;
   const router = useRouter();
   let isLoggedIn = false;
 
@@ -11,12 +12,9 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     isLoggedIn = window.localStorage["isLoggedIn"] === "true";
   }
 
-  useEffect(() => {
-    const path = window.location.pathname;
-    if (!isLoggedIn && path !== "/login" && path !== "/signup") {
-      router.push("/login");
-    }
-  }, [isLoggedIn, router]);
+  if (!isLoggedIn && path !== "/login" && path !== "/signup") {
+    router.push("/login");
+  }
 
   return <>{children}</>;
 };
