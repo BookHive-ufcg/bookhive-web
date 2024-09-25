@@ -27,7 +27,7 @@ const Header = () => {
         alt="Logo"
         className={styles.logo}
       />
-      <Profile />
+      <Profile size={"small"} />
     </header>
   );
 };
