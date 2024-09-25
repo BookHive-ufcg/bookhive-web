@@ -1,20 +1,24 @@
 "use client";
 
 import React from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
 
-  const router = useRouter();
   let isLoggedIn = false;
 
   if (typeof window !== "undefined") {
     isLoggedIn = window.localStorage["isLoggedIn"] === "true";
   }
 
-  if (!isLoggedIn && pathname !== "/login" && pathname !== "/signup") {
-    router.push("/login");
+  if (
+    !isLoggedIn &&
+    pathname !== "/login" &&
+    pathname !== "/signup" &&
+    typeof window !== "undefined"
+  ) {
+    window.location.href = "/login";
   }
 
   return <>{children}</>;
