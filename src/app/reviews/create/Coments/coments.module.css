@@ -1,11 +1,11 @@
 
 .comentsContainer {
-    margin: 20px;
+    margin: 10px;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(195, 194, 194, 0.1);
     position: absolute;
-    top: 550px; 
+    top: 500px; 
     left: 20px; 
     width: calc(100% - 40px); 
 }
@@ -23,7 +23,6 @@
     font-size: 18px;
     font-weight: 200;
     color: var(--font-color-primary);
-
     display: flex;
     flex-direction: column; 
   }
