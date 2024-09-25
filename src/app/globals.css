@@ -1,10 +1,10 @@
 :root {
   --max-width: 1100px;
   --border-radius: 12px;
-  --font-primary: "Metamorphous";
-  --font-secondary: "Open Sans Hebrew";
+  --font-secondary: sans-serif;
 
   --font-color-secondary: #4a4545;
+  --font-color-tertiary: #999;
 
   --color-primary: #ffdd4b;
   --color-grey: #555;

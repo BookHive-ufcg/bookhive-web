@@ -1,15 +1,26 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Metamorphous } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Header from "@/components/Header";
+import AuthProvider from "@/components/AuthProvider";
 
-const inter = Inter({ subsets: ["latin"] });
+const metamorphous = Metamorphous({
+  subsets: ["latin"],
+  weight: "400",
+});
 
 export const metadata: Metadata = {
   title: "Book Hive",
   description: "Book Hive is a platform for book lovers",
 };
+
+if (
+  typeof window !== "undefined" &&
+  typeof window.localStorage["isLoggedIn"] === "undefined"
+) {
+  window.localStorage["isLoggedIn"] = false;
+}
 
 export default function RootLayout({
   children,
@@ -17,11 +28,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <Header />
-        {children}
-        <Navbar />
+    <html lang="en" className={metamorphous.className}>
+      <body>
+        <AuthProvider>
+          <Header />
+          {children}
+          <Navbar />
+        </AuthProvider>
       </body>
     </html>
   );

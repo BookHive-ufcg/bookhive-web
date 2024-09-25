@@ -1,23 +1,27 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import styles from "./header.module.css";
 import Profile from "../Profile";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const Header = () => {
   const pathname = usePathname();
+
+  const router = useRouter() ?? null;
+
+  if (pathname === "/login") {
+    return null;
+  }
 
   return (
     <header className={styles.header}>
       <div className={styles.backButtonContainer}>
         {pathname !== "/" && (
-          <Link href="/">
-            <button className={styles.backButton}>
-              <Image src="/arrow.svg" alt="Back" width={20} height={30} />
-            </button>
-          </Link>
+          <button onClick={() => router.back()} className={styles.backButton}>
+            <Image src="/arrow.svg" alt="Back" width={20} height={30} />
+          </button>
         )}
       </div>
       <Image
@@ -27,7 +31,8 @@ const Header = () => {
         alt="Logo"
         className={styles.logo}
       />
-      <Profile size={"small"} />
+      {pathname !== "/login" && pathname !== "/signup" && <Profile />}
+      {(pathname === "/login" || pathname === "/signup") && <div />}
     </header>
   );
 };

@@ -1,4 +1,67 @@
 .searchBarContainer {
   margin-top: 2rem;
   width: 70%;
+  padding-bottom: 8rem;
+}
+
+.title {
+  text-align: center;
+  margin: 4rem 0;
+  font-size: 3rem;
+  font-weight: 400;
+}
+
+.genresList {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4rem 0;
+  justify-content: space-around;
+  text-align: center;
+  margin-bottom: 8rem;
+}
+
+@media (max-width: 768px) {
+  .genresList {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.genreItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.genreItem a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.genreName {
+  font-size: 1.3rem;
+}
+
+.emotionSearchContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 20rem;
+}
+
+.emotionSearchContainer form {
+  width: min(50rem, 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.buttonContainer button {
+  width: min(20rem, 100%);
 }
