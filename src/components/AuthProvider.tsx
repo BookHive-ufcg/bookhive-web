@@ -1,10 +1,11 @@
 "use client";
 
 import React from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const path = window.location.pathname;
+  const pathname = usePathname();
+
   const router = useRouter();
   let isLoggedIn = false;
 
@@ -12,7 +13,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     isLoggedIn = window.localStorage["isLoggedIn"] === "true";
   }
 
-  if (!isLoggedIn && path !== "/login" && path !== "/signup") {
+  if (!isLoggedIn && pathname !== "/login" && pathname !== "/signup") {
     router.push("/login");
   }
 

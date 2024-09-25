@@ -13,7 +13,10 @@ export default function Signup() {
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
-  if (window.localStorage["isLoggedIn"] === "true") {
+  if (
+    typeof window !== "undefined" &&
+    window.localStorage["isLoggedIn"] === "true"
+  ) {
     router.push("/");
     return null;
   }
