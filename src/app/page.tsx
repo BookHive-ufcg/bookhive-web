@@ -1,3 +1,4 @@
+import BookSection from "@/components/BookSection";
 import Title from "@/components/Title";
 
 export default function Home() {
@@ -7,7 +8,7 @@ export default function Home() {
         titleText="Welcome to Bookhive!"
         subTitleText={"Discover more about book's world"}
       />
-      <h1> sgsugysgs </h1>
+      <BookSection></BookSection>
     </main>
   );
 }
