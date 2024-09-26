@@ -1,11 +1,70 @@
+"use client";
+
 import styles from "./login.module.css";
 
 import Input from "@/components/Input";
 import Button from "@/components/Button";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+
+const url = process.env.BACK_END_URL || "http://localhost:8080";
 
 export default function Login() {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
+
+  if (
+    typeof window !== "undefined" &&
+    window.localStorage["isLoggedIn"] === "true"
+  ) {
+    router.push("/");
+    return null;
+  }
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setLoading(true);
+    setError(null);
+
+    const formData = new FormData(event.currentTarget);
+    const username = formData.get("username") as string;
+    const password = formData.get("password") as string;
+
+    // TODO: REMOVE THIS
+    if (username === "admin" && password === "admin") {
+      router.push("/");
+      window.localStorage["isLoggedIn"] = true;
+      return;
+    }
+    // -----------------
+
+    const response = await fetch(`${url}/user/${username}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (response.status === 404) {
+      setError("User not found");
+      setLoading(false);
+      return;
+    }
+    const result = await response.json();
+
+    if (result.username === username && result.password === password) {
+      router.push("/");
+      window.localStorage["isLoggedIn"] = true;
+    } else {
+      setError("Password is incorrect");
+    }
+
+    setLoading(false);
+  };
+
   return (
     <main>
       <div className={styles.container}>
@@ -27,21 +86,25 @@ export default function Login() {
           <div className={styles.rightContent}>
             <h1 className={styles.title}>Sign in to BookHive</h1>
             <p className={styles.subTitle}>Use your username and password</p>
-            <form className={styles.form}>
+            <form onSubmit={handleSubmit} className={styles.form}>
               <div className={styles.formGroup}>
                 <Input
                   type="text"
                   id="username"
+                  name="username"
                   placeholder="Username"
                   label="Username"
+                  required
                 />
               </div>
               <div className={styles.formGroup}>
                 <Input
                   type="password"
                   id="password"
+                  name="password"
                   placeholder="Password"
                   label="Password"
+                  required
                 />
               </div>
 
@@ -49,7 +112,10 @@ export default function Login() {
                 Forgot your password?
               </a>
 
-              <Button className={styles.button}>Login</Button>
+              <Button type="submit" className={styles.button}>
+                {loading ? "Logging in..." : "Login"}
+              </Button>
+              {error && <p style={{ color: "red" }}>{error}</p>}
             </form>
 
             <div className={styles.separator}>

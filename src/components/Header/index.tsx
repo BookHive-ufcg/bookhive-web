@@ -8,7 +8,12 @@ import { useRouter } from "next/navigation";
 
 const Header = () => {
   const pathname = usePathname();
+
   const router = useRouter() ?? null;
+
+  if (pathname === "/login") {
+    return null;
+  }
 
   return (
     <header className={styles.header}>
@@ -26,7 +31,9 @@ const Header = () => {
         alt="Logo"
         className={styles.logo}
       />
-      {pathname !== "/login" && pathname !== "/signup" && <Profile />}
+      {pathname !== "/login" && pathname !== "/signup" && (
+        <Profile size={"small"} />
+      )}
       {(pathname === "/login" || pathname === "/signup") && <div />}
     </header>
   );
