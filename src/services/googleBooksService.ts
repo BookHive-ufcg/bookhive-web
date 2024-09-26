@@ -1,6 +1,5 @@
 const baseURL = "https://www.googleapis.com/books/v1";
-const apiKey =
-  process.env.NEXT_PUBLIC_API_KEY || "AIzaSyBHaYZS1VLIRubf1Tl5XSQGBInPpAPsUVk";
+const apiKey = String(process.env.NEXT_PUBLIC_API_KEY);
 
 const googleBooksService = {
   searchBooks: async (query: string) => {
