@@ -3,16 +3,14 @@
 import { useState } from "react";
 import SearchBar from "@/components/SearchBar";
 import styles from "./search.module.css";
-import Image from "next/image";
-import Link from "next/link";
-import Input from "@/components/Input";
-import Button from "@/components/Button";
 import googleBooksService from "@/services/googleBooksService";
 
 import BookSection from "@/components/BookSection";
 import Title from "@/components/Title";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const router = useRouter()
   const [searchResults, setSearchResults] = useState([]);
 
   const handleSearch = async (query: string) => {
@@ -43,7 +41,7 @@ export default function Home() {
             <h2 className={styles.searchResultsTitle}>Search Results</h2>
             <div className={styles.bookGrid}>
               {searchResults.map((book: any) => (
-                <div key={book.id} className={styles.bookCard}>
+                <div key={book.id} className={styles.bookCard} onClick={() => router.push(`/reviews/${book.id}`)}>
                   <img
                     src={
                       book.volumeInfo.imageLinks?.thumbnail ||
