@@ -1,8 +1,13 @@
-
 import React from "react";
 import styles from "./date-fields.module.css";
 
-const DateFields = () => {
+const DateFields = ({
+  setStartDate,
+  setEndDate,
+}: {
+  setStartDate: (date: string) => void;
+  setEndDate: (date: string) => void;
+}) => {
   return (
     <div className={styles.dateFieldsContainer}>
       <div className={styles.dateFieldGroup}>
@@ -12,8 +17,8 @@ const DateFields = () => {
         <input
           required
           id="startDate"
-          type="text"
-          placeholder="dd/mm/yyyy"
+          type="date"
+          onChange={(e) => setStartDate(e.target.value)}
           className={styles.dateFieldInput}
         />
       </div>
@@ -24,8 +29,8 @@ const DateFields = () => {
         </label>
         <input
           id="endDate"
-          type="text"
-          placeholder="dd/mm/yyyy"
+          type="date"
+          onChange={(e) => setEndDate(e.target.value)}
           className={styles.dateFieldInput}
         />
       </div>
@@ -34,3 +39,4 @@ const DateFields = () => {
 };
 
 export default DateFields;
+
