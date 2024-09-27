@@ -9,7 +9,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-const url = process.env.BACK_END_URL || "http://localhost:8080";
+const url = String(process.env.NEXT_PUBLIC_BACK_END_URL);
 
 export default function Login() {
   const [loading, setLoading] = useState(false);
@@ -23,6 +23,8 @@ export default function Login() {
     router.push("/");
     return null;
   }
+
+  console.log(url);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -58,6 +60,7 @@ export default function Login() {
     if (result.username === username && result.password === password) {
       router.push("/");
       window.localStorage["isLoggedIn"] = true;
+      window.localStorage["username"] = result.username;
     } else {
       setError("Password is incorrect");
     }

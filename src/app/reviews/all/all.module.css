@@ -1,0 +1,24 @@
+.reviewsList {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.reviewItem {
+  border: 1px solid #f7dc6f;
+  padding: 1rem;
+  border-radius: 10px;
+  background-color: white;
+  display: flex;
+  height: 10rem;
+}
+
+.username {
+  width: 12rem;
+}
+
+.comment {
+  color: #555;
+  font-size: 0.8rem;
+  width: 40rem;
+}

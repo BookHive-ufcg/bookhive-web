@@ -1,6 +1,6 @@
 /* animation.module.css */
 
-.columnComponents{
+.columnComponents {
   display: flex;
   flex-direction: column;
 }
@@ -23,16 +23,16 @@
   margin: 20px;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(195, 194, 194, 0.1);
   position: absolute;
   top: 250px;
   right: 300px;
   width: 200px;
   height: 200px;
-  
 }
 .yellow {
-  filter: drop-shadow(0 0 15px rgba(255, 158, 11, 0.9)); /* Efeito de sombra amarela */
+  filter: drop-shadow(
+    0 0 15px rgba(255, 158, 11, 0.9)
+  ); /* Efeito de sombra amarela */
 }
 
 .radioInput {

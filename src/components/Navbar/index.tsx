@@ -19,7 +19,7 @@ export default function Navbar() {
       <Link href="/" className={pathname === "/" ? styles.active : undefined}>
         <FaHome className={styles.icon} />
       </Link>
-      <Link
+      {/* <Link
         href="/reviews"
         className={pathname === "/reviews" ? styles.active : undefined}
       >
@@ -36,7 +36,7 @@ export default function Navbar() {
         className={pathname === "/search" ? styles.active : undefined}
       >
         <FaSearch className={styles.icon} />
-      </Link>
+      </Link> */}
       <Link
         href="/profile"
         className={pathname === "/profile" ? styles.active : undefined}
