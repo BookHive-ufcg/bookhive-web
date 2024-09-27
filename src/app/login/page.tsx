@@ -60,6 +60,7 @@ export default function Login() {
     if (result.username === username && result.password === password) {
       router.push("/");
       window.localStorage["isLoggedIn"] = true;
+      window.localStorage["username"] = result.username;
     } else {
       setError("Password is incorrect");
     }

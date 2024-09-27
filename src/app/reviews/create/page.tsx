@@ -41,13 +41,20 @@ export default function CreateReview() {
       return;
     }
 
+    let username = "";
+
+    if (typeof window !== "undefined") {
+      username = window.localStorage["username"];
+    }
+
     const reviewData = {
-      username: "admin",
-      bookId,
+      bookIsbn: bookId,
+      usernameUser: username,
       startDate,
       endDate,
-      rating: selectedRating, // Envia o rating corretamente
+      rating: selectedRating,
       content: comment,
+      id: username + Date.now().toString(),
     };
 
     try {
