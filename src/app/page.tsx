@@ -6,6 +6,7 @@ import googleBooksService from "@/services/googleBooksService";
 import Title from '@/components/Title';
 import SearchBar from '@/components/SearchBar';
 import styles from './search.module.css'
+import Animation from './reviews/create/Animation';
 
 
 export default function Home() {

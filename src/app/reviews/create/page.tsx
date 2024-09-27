@@ -1,30 +1,41 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Animation from "./Animation";
 import DateFields from "./DateFields";
 import Coments from "./Coments";
-import styles from "./create-review.module.css";
+import styles from "./page.module.css";
+import Title from "@/components/Title";
 
 const url = process.env.BACK_END_URL || "http://localhost:8080";
 
 export default function CreateReview() {
   const [loading, setLoading] = useState(false);
+  const [bookId, setBookId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [rating, setRating] = useState<number | null>(null);
+  const [selectedRating, setSelectedRating] = useState<number>(0); // Certifique-se que é um número
   const [startDate, setStartDate] = useState<string>("");
   const [endDate, setEndDate] = useState<string>("");
   const [comment, setComment] = useState<string>("");
   const router = useRouter();
-  const bookId = localStorage.getItem("bookId"); // Obtendo o bookId do localStorage
+
+  useEffect(() => {
+    const storedBookId = localStorage.getItem('bookIdForReview');
+    if (storedBookId) {
+      setBookId(storedBookId);
+    } else {
+      router.push('/reviews/view');
+    }
+  }, [router]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true);
     setError(null);
 
-    if (!rating || !startDate || !endDate || !comment || !bookId) {
+    // Verificação de campos obrigatórios
+    if (!selectedRating || !startDate || !endDate || !comment || !bookId) {
       setError("All fields are required.");
       setLoading(false);
       return;
@@ -32,10 +43,10 @@ export default function CreateReview() {
 
     const reviewData = {
       username: "admin",
-      bookId, // bookId vindo do localStorage
+      bookId, 
       startDate,
       endDate,
-      rating,
+      rating: selectedRating, // Envia o rating corretamente
       content: comment,
     };
 
@@ -49,7 +60,7 @@ export default function CreateReview() {
       });
 
       if (response.ok) {
-        router.push("/reviews"); // Redirecionar para a página de reviews após sucesso
+        router.push("/reviews"); // Redirecionar após sucesso
       } else {
         const result = await response.json();
         setError(result.message || "Failed to submit the review.");
@@ -62,24 +73,26 @@ export default function CreateReview() {
   };
 
   return (
-    <div className={styles.container}>
-      <h1>Create Review</h1>
+    <main>
+      <Title titleText="Review" subTitleText="Create the best review" />
       <form onSubmit={handleSubmit} className={styles.form}>
-     
-        <Animation rating={rating} setRating={setRating} />
+        {/* Componente de avaliação */}
+        <Animation selectedRating={selectedRating} setSelectedRating={setSelectedRating} />
 
-
+        {/* Campos de data */}
         <DateFields setStartDate={setStartDate} setEndDate={setEndDate} />
 
-
+        {/* Campo de comentários */}
         <Coments comment={comment} setComment={setComment} />
 
-        <button type="submit" className={styles.submitButton}>
+        {/* Botão de submissão */}
+        <button type="submit" className={styles.submit}>
           {loading ? "Submitting..." : "Submit Review"}
         </button>
 
+        {/* Exibe erros, se houver */}
         {error && <p className={styles.error}>{error}</p>}
       </form>
-    </div>
+    </main>
   );
 }

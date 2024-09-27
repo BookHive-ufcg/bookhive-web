@@ -1,53 +1,50 @@
-"use client";
-import React, { useState } from 'react';
-import Image from 'next/image';
-import styles from './animation.module.css';
-import AbelhaSvg from './abelha.svg';
-import AbelhaAmarelaSvg from './abelhaAmarela.svg';
+import React from "react";
+import Image from "next/image";
+import AbelhaSvg from "./abelha.svg";
+import AbelhaAmarelaSvg from "./abelhaAmarela.svg";
+import styles from "./animation.module.css";
 
-const Animation = () => {
-  const [selectedRating, setSelectedRating] = useState('');
-
-  const handleRatingChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedRating(event.target.value);
-  };
-
+const Animation = ({
+  selectedRating,
+  setSelectedRating,
+}: {
+  selectedRating: number;
+  setSelectedRating: (value: number) => void;
+}) => {
   return (
     <div className={styles.columnsComponents}>
       <div className={styles.nameContainer}>
         <h2>Rating</h2>
       </div>
-    <div className={styles.radioContainer}>
-      {[5, 4, 3, 2, 1].map((rating) => (
-        <div key={rating}>
-          <input
-            id={`rating-${rating}`}
-            type="radio"
-            name="rating"
-            value={rating}
-            className={styles.radioInput}
-            checked={selectedRating === rating.toString()}
-            onChange={handleRatingChange}
-          />
-          <label 
-            htmlFor={`rating-${rating}`} 
-            className={styles.radioLabel} 
-            title={`${rating} stars`}
-            onClick={() => {
-              setSelectedRating(selectedRating === rating.toString() ? '' : rating.toString());
-            }}
-          >
-            <Image
-              src={rating <= Number(selectedRating) ? AbelhaAmarelaSvg : AbelhaSvg}
-              alt="Abelha"
-              height={20}
-              width={20}
-              className={styles.radioLabelImage}
+      <div className={styles.radioContainer}>
+        {[5, 4, 3, 2, 1].map((r) => (
+          <div key={r}>
+            <input
+              id={`rating-${r}`}
+              type="radio"
+              name="rating"
+              value={r}
+              className={styles.radioInput}
+              checked={selectedRating === r}
+              onChange={() => setSelectedRating(r)} // Atualiza diretamente o selectedRating
             />
-          </label>
-        </div>
-      ))}
-    </div>
+            <label
+              htmlFor={`rating-${r}`}
+              className={styles.radioLabel}
+              title={`${r} stars`}
+              onClick={() => setSelectedRating(r)} // Alterna entre o valor clicado
+            >
+              <Image
+                src={r <= selectedRating ? AbelhaAmarelaSvg : AbelhaSvg}
+                alt="Abelha"
+                height={20}
+                width={20}
+                className={styles.radioLabelImage}
+              />
+            </label>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

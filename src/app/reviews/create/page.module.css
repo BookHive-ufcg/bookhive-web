@@ -1,16 +1,16 @@
 .submit {
-    font-size: 18px; /* Aumenta o tamanho do texto */
-    padding: 10px 20px; /* Aumenta o tamanho do botão */
-    position: absolute; /* Posicionamento absoluto */
-    bottom: 80px; /* Distância do fundo da tela */
-    right: 20px; /* Distância da borda direita da tela */
-    background-color: #ffdd48; /* Cor de fundo */
-    color: black; /* Cor do texto */
-    border: none; /* Remove a borda */
-    border-radius: 5px; /* Arredonda os cantos */
-    cursor: pointer; /* Mostra o cursor de mão */
+    font-size: 18px; 
+    padding: 10px 20px; 
+    position: absolute; 
+    bottom: 80px; 
+    right: 20px; 
+    background-color: #ffdd48; 
+    color: black; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
   }
   
   .submit:hover {
-    background-color:#fde783; /* Cor de fundo ao passar o mouse */
+    background-color:#fde783; 
   }
