@@ -8,7 +8,7 @@ import Coments from "./Coments";
 import styles from "./page.module.css";
 import Title from "@/components/Title";
 
-const url = process.env.BACK_END_URL || "http://localhost:8080";
+const url = String(process.env.NEXT_PUBLIC_BACK_END_URL);
 
 export default function CreateReview() {
   const [loading, setLoading] = useState(false);
@@ -21,11 +21,11 @@ export default function CreateReview() {
   const router = useRouter();
 
   useEffect(() => {
-    const storedBookId = localStorage.getItem('bookIdForReview');
+    const storedBookId = localStorage.getItem("bookIdForReview");
     if (storedBookId) {
       setBookId(storedBookId);
     } else {
-      router.push('/reviews/view');
+      router.push("/reviews/view");
     }
   }, [router]);
 
@@ -43,7 +43,7 @@ export default function CreateReview() {
 
     const reviewData = {
       username: "admin",
-      bookId, 
+      bookId,
       startDate,
       endDate,
       rating: selectedRating, // Envia o rating corretamente
@@ -77,7 +77,10 @@ export default function CreateReview() {
       <Title titleText="Review" subTitleText="Create the best review" />
       <form onSubmit={handleSubmit} className={styles.form}>
         {/* Componente de avaliação */}
-        <Animation selectedRating={selectedRating} setSelectedRating={setSelectedRating} />
+        <Animation
+          selectedRating={selectedRating}
+          setSelectedRating={setSelectedRating}
+        />
 
         {/* Campos de data */}
         <DateFields setStartDate={setStartDate} setEndDate={setEndDate} />
