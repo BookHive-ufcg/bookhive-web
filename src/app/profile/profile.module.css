@@ -1,78 +1,80 @@
 .profilePicture {
-    width: 1200px; 
-    height: 1400px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-right: 50px;
+  width: 1200px;
+  height: 1400px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 50px;
 }
 
 .profileContainer {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    padding-right: 1500px; 
-    padding-top: 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 2rem;
 }
 
 .profileText {
-    font-family: var(--font-secondary);
-    color: var(--color-grey);
-    font-size: 32px; 
-    margin-top: 10px; 
+  font-family: var(--font-secondary);
+  color: var(--color-grey);
+  font-size: 32px;
+  margin-top: 10px;
 }
 
 .profileDescription {
-    font-family: var(--font-secondary);
-    color: var(--color-black);
-    font-size: 40px;
-    margin-top: 38px; 
+  font-family: var(--font-secondary);
+  color: var(--color-black);
+  font-size: 40px;
+  margin-top: 38px;
 }
 
 .textContainer {
-    display: flex; 
-    flex-direction: column;
-    justify-content: center; 
-    margin-left: 50px; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 50px;
 }
 
 .booksContainer {
-    display: flex; 
-    flex-direction: column;
-    justify-content: center; 
-    margin-right: 1000px;
-    margin-bottom: 200px; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  padding: 2rem;
+  margin-bottom: 10rem;
 }
 
 .booksTitle {
-    font-family: var(--font-secondary);
-    color: var(--color-grey);
-    font-size: 36px;
-    margin-bottom: 36px; 
+  font-family: var(--font-secondary);
+  color: var(--color-grey);
+  font-size: 36px;
+  margin-bottom: 36px;
+  text-transform: uppercase;
 }
 
 .bookList {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px; 
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
 .bookItem {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 .bookImage {
-    width: 300px; 
-    height: 400px;
-    object-fit: cover;
-    border-radius: 8px;
-    margin-bottom: 10px; /* Espaço entre a imagem e o título */
+  width: 300px;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px; /* Espaço entre a imagem e o título */
 }
 
 .bookTitle {
-    font-family: var(--font-secondary);
-    color: var(--color-grey);
-    font-size: 18px; 
+  font-family: var(--font-secondary);
+  color: var(--color-grey);
+  font-size: 18px;
 }
