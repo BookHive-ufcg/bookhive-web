@@ -3,12 +3,8 @@
 import ProfilePicture from "@/components/Profile";
 import styles from "./profile.module.css";
 import { useEffect, useState } from "react";
-
-const books = [
-  { id: 1, title: "Admirável Mundo Novo", image: "/img/crepusculo.jpg" },
-  { id: 2, title: "1984", image: "/img/crepusculo.jpg" },
-  { id: 3, title: "Fahrenheit 451", image: "/img/crepusculo.jpg" },
-];
+import Image from "next/image";
+import googleBooksService from "@/services/googleBooksService"; // Importar o serviço
 
 const url = String(process.env.NEXT_PUBLIC_BACK_END_URL);
 
@@ -19,6 +15,7 @@ export default function Profile() {
     lastName: "",
   });
   const [reviews, setReviews] = useState([]);
+  const [bookDetails, setBookDetails] = useState({});
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -41,6 +38,7 @@ export default function Profile() {
         }
 
         const result = await response.json();
+        console.log(result, "User data fetched");
         setUser(result);
       }
     };
@@ -63,13 +61,48 @@ export default function Profile() {
 
         const result = await response.json();
         setReviews(result);
+        console.log(result, "Reviews fetched");
+
+        // Mapeia os ISBNs dos livros das resenhas para buscar os detalhes
+        const bookRequests = result
+          .filter((review) => review.bookIsbn?.isbn)
+          .map((review) => {
+            const isbn = review.bookIsbn.isbn;
+            console.log("ISBN being processed:", isbn);
+            return googleBooksService.getBookById(isbn); // Usando a função do serviço
+          });
+
+        const bookResponses = await Promise.all(bookRequests);
+
+        console.log(bookResponses, "Book responses after reviews");
+
+        const booksMap = {};
+        result.forEach((review, index) => {
+          const isbn = review.bookIsbn?.isbn;
+
+          if (isbn) {
+            const volumeInfo = bookResponses[index]?.volumeInfo || {};
+            const { title = "Título não disponível", imageLinks = {} } =
+              volumeInfo;
+            booksMap[isbn] = {
+              title,
+              image: imageLinks.thumbnail || "/img/book-placeholder.png",
+            };
+            console.log(`Book details for ISBN ${isbn}:`, booksMap[isbn]);
+          }
+        });
+
+        console.log("Books Map:", booksMap);
+        setBookDetails(booksMap);
       }
     };
+
     fetchReviews();
   }, [username]);
 
   return (
-    <main>
+    <main className={styles.main}>
+      {/* User Profile */}
       <div className={styles.profileContainer}>
         <ProfilePicture size="large" />
         <div className={styles.textContainer}>
@@ -79,20 +112,40 @@ export default function Profile() {
           <div className={styles.profileText}>{reviews.length} publicações</div>
         </div>
       </div>
-      <div className={styles.booksContainer}>
-        <h2 className={styles.booksTitle}>My publication</h2>
-        <div className={styles.bookList}>
-          {books.map((book) => (
-            <div key={book.id} className={styles.bookItem}>
-              <img
-                src={book.image}
-                alt={book.title}
-                className={styles.bookImage}
-              />
-              <div className={styles.bookTitle}>{book.title}</div>
-            </div>
-          ))}
-        </div>
+
+      {/* User's Reviews */}
+      <div className={styles.reviewsContainer}>
+        <h2 className={styles.reviewsTitle}>Minhas Resenhas</h2>
+        <ul className={styles.reviewsList}>
+          {reviews.map((review) => {
+            const isbn = review.bookIsbn?.isbn;
+            const bookInfo = bookDetails[isbn] || {};
+
+            console.log(`Rendering review for ISBN: ${isbn}`, bookInfo);
+
+            return (
+              <li key={review.id} className={styles.reviewItem}>
+                <div className={styles.bookInfo}>
+                  <Image
+                    src={bookInfo.image || "/img/book-placeholder.png"}
+                    alt={bookInfo.title || "Livro sem título"}
+                    className={styles.bookImage}
+                    width={60}
+                    height={90}
+                    priority
+                  />
+                  <div className={styles.bookDetails}>
+                    <p className={styles.bookTitle}>
+                      {bookInfo.title || "Título não disponível"}
+                    </p>
+                    <p className={styles.rating}>Rating: {review.rating}</p>
+                  </div>
+                </div>
+                <p className={styles.comment}>{review.content}</p>
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </main>
   );
