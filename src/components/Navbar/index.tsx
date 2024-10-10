@@ -31,12 +31,13 @@ export default function Navbar() {
       >
         <FaPlus className={styles.icon} />
       </Link>
+      */}
       <Link
         href="/search"
         className={pathname === "/search" ? styles.active : undefined}
       >
         <FaSearch className={styles.icon} />
-      </Link> */}
+      </Link>
       <Link
         href="/profile"
         className={pathname === "/profile" ? styles.active : undefined}
