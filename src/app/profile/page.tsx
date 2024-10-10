@@ -8,26 +8,31 @@ import googleBooksService from "@/services/googleBooksService";
 
 const url = String(process.env.NEXT_PUBLIC_BACK_END_URL);
 
-interface User {
-  firstName: string;
-  lastName: string;
+// Definindo a interface para o objeto de Review
+interface Review {
+  id: string;
+  content: string;
+  bookIsbn?: {
+    isbn: string;
+  };
 }
 
-interface BookDetails {
+// Definindo o tipo do objeto de detalhes do livro
+interface BookDetail {
   title: string;
   image: string;
 }
 
 export default function Profile() {
   const [username, setUsername] = useState("");
-  const [user, setUser] = useState<User>({
+  const [user, setUser] = useState({
     firstName: "User not found",
     lastName: "",
   });
-  const [reviews, setReviews] = useState<any[]>([]);
-  const [bookDetails, setBookDetails] = useState<{
-    [key: string]: BookDetails;
-  }>({});
+  const [reviews, setReviews] = useState<Review[]>([]); // Usando a interface Review
+  const [bookDetails, setBookDetails] = useState<Record<string, BookDetail>>(
+    {}
+  ); // Definindo o tipo aqui
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -75,20 +80,25 @@ export default function Profile() {
         setReviews(result);
         console.log(result, "Reviews fetched");
 
-        const bookRequests: Promise<any>[] = result
-          .filter((review: any) => review.bookIsbn?.isbn)
-          .map((review: any) => {
-            const isbn = review.bookIsbn.isbn;
-            console.log("ISBN being processed:", isbn);
-            return googleBooksService.getBookById(isbn);
-          });
+        // Filtrar as requisições dos livros
+        const bookRequests = result
+          .filter((review: Review) => review.bookIsbn?.isbn)
+          .map((review: Review) => {
+            const isbn = review.bookIsbn?.isbn;
+            if (isbn) {
+              console.log("ISBN being processed:", isbn);
+              return googleBooksService.getBookById(isbn);
+            }
+            return null; // Retorna null se isbn for undefined
+          })
+          .filter((request: any) => request !== null); // Remove os nulls
 
         const bookResponses = await Promise.all(bookRequests);
 
         console.log(bookResponses, "Book responses after reviews");
 
-        const booksMap: { [key: string]: BookDetails } = {};
-        result.forEach((review: any, index: number) => {
+        const booksMap: Record<string, BookDetail> = {};
+        result.forEach((review: Review, index: number) => {
           const isbn = review.bookIsbn?.isbn;
 
           if (isbn) {
@@ -127,23 +137,27 @@ export default function Profile() {
         <ul className={styles.reviewsList}>
           {reviews.map((review) => {
             const isbn = review.bookIsbn?.isbn;
-            const bookInfo: BookDetails | undefined = bookDetails[isbn || ""];
+            const bookInfo = isbn ? bookDetails[isbn] : undefined; // Aqui definimos bookInfo como undefined se isbn não existir.
+
+            // Use valores padrão para evitar acessar propriedades de um objeto indefinido.
+            const title = bookInfo ? bookInfo.title : "Título não disponível";
+            const image = bookInfo
+              ? bookInfo.image
+              : "/img/book-placeholder.png";
 
             return (
               <li key={review.id} className={styles.reviewItem}>
                 <div className={styles.bookInfo}>
                   <Image
-                    src={bookInfo?.image || "/img/book-placeholder.png"}
-                    alt={bookInfo?.title || "Livro sem título"}
+                    src={image}
+                    alt={title}
                     className={styles.bookImage}
                     width={60}
                     height={90}
                     priority
                   />
                   <div className={styles.bookDetails}>
-                    <p className={styles.bookTitle}>
-                      {bookInfo?.title || "Título não disponível"}
-                    </p>
+                    <p className={styles.bookTitle}>{title}</p>
                   </div>
                 </div>
                 <p className={styles.comment}>{review.content}</p>
