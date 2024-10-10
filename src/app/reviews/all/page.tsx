@@ -10,31 +10,11 @@ export default function ViewAllReviews() {
   const [book, setBook] = useState<any>(null);
   const [reviews, setReviews] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const [username, setUsername] = useState("");
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      if (username) {
-        const response = await fetch(`${url}/user/${username}`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-
-        if (response.status === 404) {
-          return;
-        }
-
-        const result = await response.json();
-        setUsername(result);
-      }
-    };
-    fetchUser();
-  }, [username]);
 
   useEffect(() => {
     const storedBook = localStorage.getItem("selectedBook");
+
+    console.log(storedBook, "meu book");
 
     if (storedBook) {
       const parsedBook = JSON.parse(storedBook);
@@ -42,9 +22,7 @@ export default function ViewAllReviews() {
 
       const fetchReviews = async () => {
         try {
-          const response = await fetch(
-            `${url}/reviews/book/${parsedBook.volumeInfo.isbn}`
-          );
+          const response = await fetch(`${url}/reviews/book/${parsedBook.id}`);
           if (!response.ok) {
             throw new Error("Failed to fetch reviews");
           }
@@ -80,10 +58,8 @@ export default function ViewAllReviews() {
           <ul className={styles.reviewsList}>
             {reviews.map((review) => (
               <li key={review.id} className={styles.reviewItem}>
-                <p className={styles.username}>
-                  {review.userNameUser.fullName}
-                </p>
-                <p className={styles.comment}>{review.content}</p>
+                <p className={styles.username}>{review.content}</p>
+                <p className={styles.comment}></p>
                 <p className={styles.rating}>Rating: {review.rating}</p>
               </li>
             ))}
