@@ -21,18 +21,22 @@ const googleBooksService = {
     }
   },
 
-  // Correção na assinatura da função
   getBookById: async (id: string) => {
     try {
       const response = await googleBooksApi.get(`/volumes/${id}`);
       console.log("depurando", id);
       console.log(response);
-      return response.data; // Retorno simplificado
+      return response.data;
     } catch (error) {
-      console.error("Erro ao obter o livro:", error); // Log do erro
-      return Promise.reject(
-        error.response ? error.response.data : error.message
-      ); // Garantir que retornamos a mensagem de erro correta
+      if (axios.isAxiosError(error)) {
+        console.error("Erro ao obter o livro:", error);
+        return Promise.reject(
+          error.response ? error.response.data : error.message
+        );
+      } else {
+        console.error("Erro inesperado:", error);
+        return Promise.reject("Erro inesperado ao obter o livro");
+      }
     }
   },
 
@@ -41,7 +45,7 @@ const googleBooksService = {
       const response = await googleBooksApi.get(
         `/volumes?q=isbn:${isbn}&key=${process.env.NEXT_PUBLIC_API_KEY}`
       );
-      return response.data; // Retorno simplificado
+      return response.data;
     } catch (res: any) {
       return Promise.reject(res.data);
     }
