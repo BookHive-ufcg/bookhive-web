@@ -7,9 +7,14 @@ import styles from "./search.module.css";
 
 const url = String(process.env.NEXT_PUBLIC_BACK_END_URL);
 
+interface Book {
+  title: string;
+  author: string;
+}
+
 export default function Search() {
-  const [searchResults, setSearchResults] = useState([]);
-  const [genres, setGenres] = useState([
+  const [searchResults, setSearchResults] = useState<Book[]>([]);
+  const [genres, setGenres] = useState<string[]>([
     "Fiction",
     "Non-Fiction",
     "Romance",
@@ -27,15 +32,14 @@ export default function Search() {
     "Drama",
     "Poetry",
   ]);
-  const [selectedGenre, setSelectedGenre] = useState("");
-  const [bookTitle, setBookTitle] = useState(""); // Estado para o título do livro
-  const [filteredGenres, setFilteredGenres] = useState(genres);
-  const [showOptions, setShowOptions] = useState(false); // Estado para controlar a visibilidade
-  const [showModal, setShowModal] = useState(false); // Controle para exibir o modal
-  const [selectedBook, setSelectedBook] = useState(null); // Para armazenar o livro selecionado
+  const [selectedGenre, setSelectedGenre] = useState<string>("");
+  const [bookTitle, setBookTitle] = useState<string>("");
+  const [filteredGenres, setFilteredGenres] = useState<string[]>(genres);
+  const [showOptions, setShowOptions] = useState<boolean>(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [selectedBook, setSelectedBook] = useState<Book | string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Função para lidar com a mudança no input de gêneros
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setSelectedGenre(value);
@@ -91,22 +95,18 @@ export default function Search() {
         }
       );
 
-      // Pega a resposta como texto
       const text = await response.text();
-      console.log("Raw response:", text); // Loga a resposta para depuração
+      console.log("Raw response:", text);
 
-      // Tenta analisar a string
       let data;
       try {
-        data = JSON.parse(text); // Tenta analisar como JSON
+        data = JSON.parse(text);
       } catch (parseError) {
-        // Se falhar, define a resposta bruta como o conteúdo do modal
         setShowModal(true);
         setSelectedBook(text);
         return;
       }
 
-      // Verifica se os dados têm a estrutura esperada
       if (data.items && data.items.length > 0) {
         setSelectedBook(data.items[0]);
         setShowModal(true);
@@ -156,14 +156,12 @@ export default function Search() {
               <p>
                 {typeof selectedBook === "string"
                   ? selectedBook
-                  : `Título: ${selectedBook.title}, Autor: ${selectedBook.author}`}
+                  : `Título: ${selectedBook?.title}, Autor: ${selectedBook?.author}`}
               </p>
               <button onClick={() => setShowModal(false)}>Fechar</button>
             </div>
           </div>
         )}
-
-        {/* Campo para listar e filtrar gêneros */}
         <div style={{ padding: "20px" }}>
           <h1>Selecione ou Adicione um Gênero</h1>
           <div ref={inputRef}>
