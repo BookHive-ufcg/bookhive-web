@@ -39,4 +39,3 @@ const DateFields = ({
 };
 
 export default DateFields;
-

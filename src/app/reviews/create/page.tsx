@@ -14,39 +14,52 @@ export default function CreateReview() {
   const [loading, setLoading] = useState(false);
   const [bookId, setBookId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [selectedRating, setSelectedRating] = useState<number>(0); // Certifique-se que é um número
+  const [selectedRating, setSelectedRating] = useState<number>(0);
   const [startDate, setStartDate] = useState<string>("");
   const [endDate, setEndDate] = useState<string>("");
   const [comment, setComment] = useState<string>("");
+  const [username, setUsername] = useState<string | null>(null);
   const router = useRouter();
 
+  // Recupera o ID do livro e o nome de usuário do localStorage
   useEffect(() => {
     const storedBookId = localStorage.getItem("bookIdForReview");
+    const storedUsername = localStorage.getItem("username");
+
     if (storedBookId) {
       setBookId(storedBookId);
     } else {
-      router.push("/reviews/view");
+      router.push("/reviews/all");
+    }
+
+    if (storedUsername) {
+      setUsername(storedUsername);
+    } else {
+      setError("User is not logged in.");
     }
   }, [router]);
 
+  // Função de submissão do formulário
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true);
     setError(null);
 
     // Verificação de campos obrigatórios
-    if (!selectedRating || !startDate || !endDate || !comment || !bookId) {
+    if (
+      !selectedRating ||
+      !startDate ||
+      !endDate ||
+      !comment ||
+      !bookId ||
+      !username
+    ) {
       setError("All fields are required.");
       setLoading(false);
       return;
     }
 
-    let username = "";
-
-    if (typeof window !== "undefined") {
-      username = window.localStorage["username"];
-    }
-
+    // Dados a serem enviados na requisição
     const reviewData = {
       bookIsbn: bookId,
       usernameUser: username,
@@ -54,7 +67,7 @@ export default function CreateReview() {
       endDate,
       rating: selectedRating,
       content: comment,
-      id: username + Date.now().toString(),
+      id: username + Date.now().toString(), // Gera um ID único
     };
 
     try {
@@ -67,7 +80,9 @@ export default function CreateReview() {
       });
 
       if (response.ok) {
-        router.push("/reviews"); // Redirecionar após sucesso
+        // Exibe uma mensagem de sucesso e redireciona
+        alert("Review submitted successfully!");
+        router.push("/reviews/all"); // Redireciona para a página de reviews
       } else {
         const result = await response.json();
         setError(result.message || "Failed to submit the review.");
