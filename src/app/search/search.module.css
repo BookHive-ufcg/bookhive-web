@@ -1,129 +1,151 @@
 .searchBarContainer {
-    margin-top: 2rem;
-    width: 70%;
-    padding-bottom: 8rem;
+  margin-top: 2rem;
+  width: 70%;
+  padding-bottom: 8rem;
 }
 
 .title {
-    text-align: center;
-    margin: 4rem 0;
-    font-size: 3rem;
-    font-weight: 400;
+  text-align: center;
+  margin: 4rem 0;
+  font-size: 3rem;
+  font-weight: 400;
 }
 
 .genresList {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 4rem 0;
-    justify-content: space-around;
-    text-align: center;
-    margin-bottom: 8rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4rem 0;
+  justify-content: space-around;
+  text-align: center;
+  margin-bottom: 8rem;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 400px;
+  max-width: 90%;
+  text-align: center;
 }
 
 @media (max-width: 768px) {
-    .genresList {
-        grid-template-columns: repeat(2, 1fr);
-    }
+  .genresList {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .genreItem {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
 }
 
 .genreItem a {
-    text-decoration: none;
-    color: inherit;
+  text-decoration: none;
+  color: inherit;
 }
 
 .genreName {
-    font-size: 1.3rem;
+  font-size: 1.3rem;
 }
 
 .emotionSearchContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-bottom: 20rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 20rem;
 }
 
 .emotionSearchContainer form {
-    width: min(50rem, 100%);
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
+  width: min(50rem, 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
 .buttonContainer {
-    display: flex;
-    justify-content: flex-end;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .buttonContainer button {
-    width: min(20rem, 100%);
+  width: min(20rem, 100%);
 }
 
 .searchResults {
-    margin-top: 2rem;
+  margin-top: 2rem;
 }
 
 .searchResultsTitle {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    color: #333;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #333;
 }
 
 .bookGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
 }
 
 .bookCard {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    transition: transform 0.2s ease-in-out;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.2s ease-in-out;
 }
 
 .bookCard:hover {
-    transform: translateY(-5px);
+  transform: translateY(-5px);
 }
 
 .bookCover {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
 }
 
 .bookInfo {
-    padding: 1rem;
+  padding: 1rem;
 }
 
 .bookTitle {
-    font-size: 1rem;
-    font-weight: 600;
-    margin: 0 0 0.5rem 0;
-    color: #333;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+  color: #333;
 }
 
 .bookAuthor {
-    font-size: 0.9rem;
-    color: #666;
-    margin: 0;
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0;
 }
 
 /* Responsividade */
 @media (max-width: 768px) {
-    .bookGrid {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    }
+  .bookGrid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
 
-    .bookCover {
-        height: 200px;
-    }
+  .bookCover {
+    height: 200px;
+  }
 }
