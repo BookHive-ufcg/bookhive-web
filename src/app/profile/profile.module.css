@@ -1,80 +1,90 @@
-.profilePicture {
-  width: 1200px;
-  height: 1400px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-right: 50px;
+.main {
+  padding: 20px;
 }
 
 .profileContainer {
   display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  width: 100%;
-  padding: 2rem;
-}
-
-.profileText {
-  font-family: var(--font-secondary);
-  color: var(--color-grey);
-  font-size: 32px;
-  margin-top: 10px;
-}
-
-.profileDescription {
-  font-family: var(--font-secondary);
-  color: var(--color-black);
-  font-size: 40px;
-  margin-top: 38px;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 .textContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-left: 50px;
+  margin-left: 15px;
 }
 
-.booksContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.profileDescription {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.profileText {
+  font-size: 16px;
+  color: #666;
+}
+
+.reviewsContainer {
   width: 100%;
-  padding: 2rem;
-  margin-bottom: 10rem;
 }
 
-.booksTitle {
-  font-family: var(--font-secondary);
-  color: var(--color-grey);
-  font-size: 36px;
-  margin-bottom: 36px;
-  text-transform: uppercase;
+.reviewsTitle {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
 }
 
-.bookList {
+.reviewsList {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: wrap; /* Faz os cards ficarem lado a lado */
   gap: 20px;
 }
 
-.bookItem {
+.reviewItem {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
+  width: 220px; /* Tamanho do card */
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.bookImage {
-  width: 300px;
-  height: 400px;
-  object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: 10px; /* Espaço entre a imagem e o título */
+.bookInfo {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.bookDetails {
+  margin-left: 10px;
+  flex-grow: 1;
 }
 
 .bookTitle {
-  font-family: var(--font-secondary);
-  color: var(--color-grey);
-  font-size: 18px;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.comment {
+  font-size: 14px;
+  color: #666;
+}
+
+.bookImage {
+  border-radius: 4px;
+}
+
+.rating {
+  margin-top: 5px;
+}
+
+.beeRating {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.beeIcon {
+  width: 20px;
+  height: 20px;
 }
