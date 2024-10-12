@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import styles from "./page.module.css";
 import Title from "@/components/Title";
 import { useRouter } from "next/navigation";
+import Button from "@/components/Button";
+import Image from "next/image";
 
 export default function Reviews() {
   const [book, setBook] = useState<any>(null);
@@ -11,7 +13,7 @@ export default function Reviews() {
 
   useEffect(() => {
     const storedBook = localStorage.getItem("selectedBook");
-    console.log(storedBook, "meu livro");
+    // console.log(storedBook);
     if (storedBook) {
       setBook(JSON.parse(storedBook));
     }
@@ -34,34 +36,57 @@ export default function Reviews() {
 
   return (
     <main>
-      <Title titleText="View Book" subTitleText="" />
       <div className={styles.container}>
-        <img
-          className={styles.image}
-          src={book.volumeInfo.imageLinks?.thumbnail || "/img/padrao.jpg"}
-          alt={book.volumeInfo.title}
-          width={300}
-          height={400}
+        <Title
+          titleText={book.volumeInfo.title}
+          subTitleText={"Autor: " + book.volumeInfo.authors?.join(", ")}
         />
-        <div className={styles.textContainer}>
-          <h1 className={styles.title}>{book.volumeInfo.title}</h1>
-          <h2>{book.volumeInfo.authors?.join(", ")}</h2>
-          <p className={styles.description}>{book.volumeInfo.description}</p>
+        <div className={styles.rowOne}>
+          <Image
+            src={book.volumeInfo.imageLinks?.medium || "/img/padrao.jpg"}
+            alt={book.volumeInfo.title}
+            width={300}
+            height={400}
+          />
+          <div>
+            <Button onClick={() => handleCreateReview("create")}>
+              Create review
+            </Button>
+            <Button onClick={() => handleCreateReview("see")}>
+              See review
+            </Button>
+
+            <ul className={styles.infoList}>
+              <li className={styles.listItem}>
+                <span>Editora: </span>
+                {book.volumeInfo.publisher}
+              </li>
+              <li className={styles.listItem}>
+                <span>Publicação: </span>
+                {book.volumeInfo.publishedDate}
+              </li>
+              <li className={styles.listItem}>
+                <span>Idioma: </span>
+                {book.volumeInfo.language}
+              </li>
+              <li className={styles.listItem}>
+                <span>ISBN: </span>
+                {book.volumeInfo.industryIdentifiers?.[1]?.identifier ||
+                  book.volumeInfo.industryIdentifiers?.[0]?.identifier}
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
-      <div className={styles.rightAlignedContainer}>
-        <button
-          className={styles.button}
-          onClick={() => handleCreateReview("create")}
-        >
-          Create review
-        </button>
-        <button
-          className={styles.button}
-          onClick={() => handleCreateReview("see")}
-        >
-          See review
-        </button>
+
+        {book.volumeInfo.description && (
+          <>
+            <h2 className={styles.descriptionTitle}>Sinopse</h2>
+            <div
+              className={styles.description}
+              dangerouslySetInnerHTML={{ __html: book.volumeInfo.description }}
+            />
+          </>
+        )}
       </div>
     </main>
   );
