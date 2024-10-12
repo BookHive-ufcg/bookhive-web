@@ -14,8 +14,6 @@ export default function ViewAllReviews() {
   useEffect(() => {
     const storedBook = localStorage.getItem("selectedBook");
 
-    console.log(storedBook, "meu book");
-
     if (storedBook) {
       const parsedBook = JSON.parse(storedBook);
       setBook(parsedBook);

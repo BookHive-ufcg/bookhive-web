@@ -38,9 +38,7 @@ export default function Reviews() {
       <div className={styles.container}>
         <img
           className={styles.image}
-          src={
-            book.volumeInfo.imageLinks?.thumbnail || "/img/book-placeholder.png"
-          }
+          src={book.volumeInfo.imageLinks?.thumbnail || "/img/padrao.jpg"}
           alt={book.volumeInfo.title}
           width={300}
           height={400}

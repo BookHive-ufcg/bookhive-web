@@ -1,12 +1,11 @@
 "use client";
 
-import { useRouter } from "next/navigation"; // Certifique-se de estar usando o 'useRouter' correto
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import googleBooksService from "@/services/googleBooksService";
 import Title from "@/components/Title";
 import SearchBar from "@/components/SearchBar";
 import styles from "./search.module.css";
-import Animation from "./reviews/create/Animation";
 
 export default function Home() {
   const router = useRouter();
@@ -24,14 +23,9 @@ export default function Home() {
 
   const handleChange = async (id: string) => {
     try {
-      // Busca os dados do livro pelo ID
       console.log(id, "sshushsu");
       const book = await googleBooksService.getBookById(id);
-
-      // Armazena os dados do livro no localStorage (opcional, pode usar context ou outros métodos)
       localStorage.setItem("selectedBook", JSON.stringify(book));
-
-      // Redireciona para a página de reviews/view
       router.push("/reviews/view");
     } catch (error) {
       console.error("Error fetching book details:", error);
@@ -60,12 +54,12 @@ export default function Home() {
                   <div
                     key={book.id}
                     className={styles.bookCard}
-                    onClick={() => handleChange(book.id)} // Chamando handleChange com o ID do livro
+                    onClick={() => handleChange(book.id)}
                   >
                     <img
                       src={
                         book.volumeInfo.imageLinks?.thumbnail ||
-                        "/img/book-placeholder.png"
+                        "/img/padrao.jpg"
                       }
                       alt={book.volumeInfo.title}
                       className={styles.bookCover}

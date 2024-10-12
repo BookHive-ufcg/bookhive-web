@@ -1,90 +1,112 @@
 .main {
-  padding: 20px;
+  padding: 0.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .profileContainer {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
+  width: 100%;
 }
 
-.textContainer {
-  margin-left: 15px;
+.profileImage {
+  border-radius: 50%;
 }
 
-.profileDescription {
-  font-size: 24px;
+.userName {
+  font-size: 1.5rem;
   font-weight: bold;
+  margin: 5px 0;
 }
 
-.profileText {
-  font-size: 16px;
+.publications {
+  font-size: 1.5rem;
+  margin: 5px 0;
   color: #666;
 }
 
-.reviewsContainer {
+.userBio {
+  font-size: 2rem;
+  color: #666;
+}
+
+.profileContainer {
+  margin-bottom: 15px;
   width: 100%;
 }
 
 .reviewsTitle {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 20px;
+  font-size: 1.5rem;
+  margin-top: 15px;
 }
 
 .reviewsList {
   display: flex;
-  flex-wrap: wrap; /* Faz os cards ficarem lado a lado */
-  gap: 20px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 15px;
 }
 
 .reviewItem {
   display: flex;
   flex-direction: column;
-  width: 220px; /* Tamanho do card */
-  padding: 15px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 15px;
+  background-color: #f0f8ff;
+  border-radius: 0.625rem;
+  box-shadow: 0 0.375rem 0.75rem rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: calc(33.33% - 5px);
+  box-sizing: border-box;
 }
 
 .bookInfo {
   display: flex;
   align-items: flex-start;
-  margin-bottom: 10px;
-}
-
-.bookDetails {
-  margin-left: 10px;
-  flex-grow: 1;
-}
-
-.bookTitle {
-  font-size: 16px;
-  font-weight: bold;
   margin-bottom: 5px;
 }
 
-.comment {
-  font-size: 14px;
-  color: #666;
-}
-
-.bookImage {
-  border-radius: 4px;
-}
-
-.rating {
-  margin-top: 5px;
-}
-
-.beeRating {
+.bookDetails {
   display: flex;
-  align-items: center;
-  gap: 5px;
+  flex-direction: column;
+  margin-left: 0.9375rem;
+}
+
+.bookTitle {
+  font-weight: bold;
+  font-size: 1.2rem;
 }
 
 .beeIcon {
-  width: 20px;
-  height: 20px;
+  margin-left: 5px;
+  color: #f39c12;
+}
+
+.commentLabel {
+  margin-top: 5px;
+  font-weight: bold;
+}
+
+.comment {
+  margin-top: 5px;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+@media (max-width: 1500px) {
+  .bookDetails {
+    width: 900px;
+  }
+}
+
+@media (max-width: 768px) {
+  .bookDetails {
+    width: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .bookDetails {
+    width: 100%;
+  }
 }
