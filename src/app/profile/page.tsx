@@ -3,13 +3,14 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import ProfilePicture from "@/components/Profile";
+import Bee from "@/components/Bee";
 import styles from "./profile.module.css";
 import googleBooksService from "@/services/googleBooksService";
 
 const url = String(process.env.NEXT_PUBLIC_BACK_END_URL);
 
-// Definindo a interface para o objeto de Review
 interface Review {
+  rating: number;
   id: string;
   content: string;
   bookIsbn?: {
@@ -17,7 +18,6 @@ interface Review {
   };
 }
 
-// Definindo o tipo do objeto de detalhes do livro
 interface BookDetail {
   title: string;
   image: string;
@@ -29,10 +29,10 @@ export default function Profile() {
     firstName: "User not found",
     lastName: "",
   });
-  const [reviews, setReviews] = useState<Review[]>([]); // Usando a interface Review
+  const [reviews, setReviews] = useState<Review[]>([]);
   const [bookDetails, setBookDetails] = useState<Record<string, BookDetail>>(
     {}
-  ); // Definindo o tipo aqui
+  );
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -55,7 +55,6 @@ export default function Profile() {
         }
 
         const result = await response.json();
-        console.log(result, "User data fetched");
         setUser(result);
       }
     };
@@ -78,24 +77,19 @@ export default function Profile() {
 
         const result = await response.json();
         setReviews(result);
-        console.log(result, "Reviews fetched");
 
-        // Filtrar as requisições dos livros
         const bookRequests = result
           .filter((review: Review) => review.bookIsbn?.isbn)
           .map((review: Review) => {
             const isbn = review.bookIsbn?.isbn;
             if (isbn) {
-              console.log("ISBN being processed:", isbn);
               return googleBooksService.getBookById(isbn);
             }
-            return null; // Retorna null se isbn for undefined
+            return null;
           })
-          .filter((request: any) => request !== null); // Remove os nulls
+          .filter((request: any) => request !== null);
 
         const bookResponses = await Promise.all(bookRequests);
-
-        console.log(bookResponses, "Book responses after reviews");
 
         const booksMap: Record<string, BookDetail> = {};
         result.forEach((review: Review, index: number) => {
@@ -107,13 +101,11 @@ export default function Profile() {
               volumeInfo;
             booksMap[isbn] = {
               title,
-              image: imageLinks.thumbnail || "/img/book-placeholder.png",
+              image: imageLinks.thumbnail || "/img/padrao.jpg",
             };
-            console.log(`Book details for ISBN ${isbn}:`, booksMap[isbn]);
           }
         });
 
-        console.log("Books Map:", booksMap);
         setBookDetails(booksMap);
       }
     };
@@ -125,46 +117,56 @@ export default function Profile() {
     <main className={styles.main}>
       <div className={styles.profileContainer}>
         <ProfilePicture size="large" />
-        <div className={styles.textContainer}>
-          <div className={styles.profileDescription}>
-            {user.firstName + " " + user.lastName}
-          </div>
-          <div className={styles.profileText}>{reviews.length} publicações</div>
+        <div className={styles.userName}>
+          {user.firstName + " " + user.lastName}
         </div>
-      </div>
-      <div className={styles.reviewsContainer}>
-        <h2 className={styles.reviewsTitle}>Minhas Resenhas</h2>
-        <ul className={styles.reviewsList}>
-          {reviews.map((review) => {
-            const isbn = review.bookIsbn?.isbn;
-            const bookInfo = isbn ? bookDetails[isbn] : undefined; // Aqui definimos bookInfo como undefined se isbn não existir.
+        <div className={styles.publications}>{reviews.length} publicações</div>
+        <div></div>
+        <div className={styles.main}>
+          <div className={styles.profileContainer}></div>
+          <div className={styles.reviewsContainer}>
+            <h2 className={styles.reviewsTitle}>Minhas Resenhas</h2>
+            <ul className={styles.reviewsList}>
+              {reviews.map((review) => {
+                const isbn = review.bookIsbn?.isbn;
+                const bookInfo = isbn ? bookDetails[isbn] : undefined;
 
-            // Use valores padrão para evitar acessar propriedades de um objeto indefinido.
-            const title = bookInfo ? bookInfo.title : "Título não disponível";
-            const image = bookInfo
-              ? bookInfo.image
-              : "/img/book-placeholder.png";
+                const title = bookInfo
+                  ? bookInfo.title
+                  : "Título não disponível";
+                const image = bookInfo
+                  ? bookInfo.image
+                  : "/img/book-placeholder.png";
 
-            return (
-              <li key={review.id} className={styles.reviewItem}>
-                <div className={styles.bookInfo}>
-                  <Image
-                    src={image}
-                    alt={title}
-                    className={styles.bookImage}
-                    width={60}
-                    height={90}
-                    priority
-                  />
-                  <div className={styles.bookDetails}>
-                    <p className={styles.bookTitle}>{title}</p>
-                  </div>
-                </div>
-                <p className={styles.comment}>{review.content}</p>
-              </li>
-            );
-          })}
-        </ul>
+                return (
+                  <li key={review.id} className={styles.reviewItem}>
+                    <div className={styles.bookInfo}>
+                      <Image
+                        src={image}
+                        alt={title}
+                        className={styles.bookImage}
+                        width={150}
+                        height={300}
+                        priority
+                      />
+                      <div className={styles.bookDetails}>
+                        <p className={styles.bookTitle}>{title}</p>
+                        <p className={styles.rating}>
+                          <Bee
+                            count={review.rating}
+                            className={styles.beeIcon}
+                          />
+                        </p>
+                        <p className={styles.commentLabel}>Comentário:</p>
+                        <p className={styles.comment}>{review.content}</p>
+                      </div>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </div>
       </div>
     </main>
   );

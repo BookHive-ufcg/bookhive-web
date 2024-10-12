@@ -15,7 +15,7 @@ const googleBooksService = {
       const response = await googleBooksApi.get(
         `/volumes?${queryParams.toString()}`
       );
-      return response.data; // Retorno simplificado
+      return response.data;
     } catch (res: any) {
       return Promise.reject(res.data);
     }
