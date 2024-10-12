@@ -65,7 +65,6 @@ export default function Search() {
       );
 
       const text = await response.text();
-      console.log("Raw response:", text);
 
       let data;
       try {

@@ -1,58 +1,45 @@
-.main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .container {
   display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  margin-bottom: 270px;
-  width: 100%;
-  padding-left: 50px;
+  flex-direction: column;
+  width: min(40rem, 90%);
+  margin-bottom: 10rem;
 }
 
-.image {
-  margin-right: 20px;
+.rowOne {
+  display: flex;
+  justify-content: space-between;
 }
 
-.textContainer {
+.rowOne > div {
   display: flex;
   flex-direction: column;
+  gap: 1rem;
 }
 
-.title {
-  margin: 0;
-  font-size: 24px;
+.rowOne > div > button {
+  height: 3rem;
 }
 
-.description {
-  margin-top: 10px;
-  font-size: 16px;
-  max-width: 500px;
-  text-align: justify;
+.listItem {
+  list-style: none;
+  font-family: var(--font-secondary);
+  color: var(--font-color-secondary);
+  margin-bottom: 2px;
 }
 
-.rightAlignedContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  position: absolute; /* Tornado absoluto para alinhá-lo com o container */
-  top: 350px; /* Ajuste para mover para o topo */
-  right: 80px; /* Ajuste conforme necessário para o espaçamento à direita */
+.listItem span {
+  font-weight: bold;
 }
 
 .button {
-  background-color: yellow;
-  color: black;
-  border: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  margin-top: 10px;
+  width: 2rem;
 }
 
-.button:hover {
-  background-color: gold;
+.descriptionTitle {
+  color: #885215;
+  margin: 4rem 0 1rem 0;
+}
+
+.description {
+  font-family: var(--font-secondary);
 }
