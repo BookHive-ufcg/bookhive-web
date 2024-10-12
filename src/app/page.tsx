@@ -15,7 +15,6 @@ export default function Home() {
     try {
       const data = await googleBooksService.searchBooks(query);
       setSearchResults(data.items || []);
-      console.log(data, "shsush");
     } catch (error) {
       console.error("Error searching books:", error);
     }
@@ -23,7 +22,6 @@ export default function Home() {
 
   const handleChange = async (id: string) => {
     try {
-      console.log(id, "sshushsu");
       const book = await googleBooksService.getBookById(id);
       localStorage.setItem("selectedBook", JSON.stringify(book));
       router.push("/reviews/view");

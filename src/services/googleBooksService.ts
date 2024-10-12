@@ -24,8 +24,6 @@ const googleBooksService = {
   getBookById: async (id: string) => {
     try {
       const response = await googleBooksApi.get(`/volumes/${id}`);
-      console.log("depurando", id);
-      console.log(response);
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
