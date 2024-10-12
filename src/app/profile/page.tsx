@@ -114,7 +114,7 @@ export default function Profile() {
   }, [username]);
 
   return (
-    <main className={styles.main}>
+    <main>
       <div className={styles.profileContainer}>
         <ProfilePicture size="large" />
         <div className={styles.userName}>
@@ -146,7 +146,7 @@ export default function Profile() {
                         alt={title}
                         className={styles.bookImage}
                         width={150}
-                        height={300}
+                        height={200}
                         priority
                       />
                       <div className={styles.bookDetails}>

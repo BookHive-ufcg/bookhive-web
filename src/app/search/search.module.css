@@ -65,6 +65,12 @@
   font-size: 1.3rem;
 }
 
+.genreSearchForm {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
 .emotionSearchContainer {
   display: flex;
   justify-content: center;

@@ -4,6 +4,12 @@
   gap: 2rem;
 }
 
+.userData {
+  display: flex;
+  flex-direction: column;
+  width: 12rem;
+}
+
 .reviewItem {
   border: 1px solid #f7dc6f;
   padding: 1rem;
@@ -14,7 +20,7 @@
 }
 
 .username {
-  width: 12rem;
+  width: fit-content;
 }
 
 .comment {

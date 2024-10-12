@@ -45,6 +45,8 @@ export default function ViewAllReviews() {
     return <p>Nenhum livro selecionado.</p>;
   }
 
+  console.log(reviews);
+
   return (
     <main>
       <div>
@@ -55,11 +57,21 @@ export default function ViewAllReviews() {
         {reviews.length > 0 ? (
           <ul className={styles.reviewsList}>
             {reviews.map((review) => (
-              <li key={review.id} className={styles.reviewItem}>
-                <p className={styles.username}>{review.content}</p>
-                <p className={styles.comment}></p>
-                <p className={styles.rating}>Rating: {review.rating}</p>
-              </li>
+              <div key={review.id} className={styles.reviewItem}>
+                <div className={styles.userData}>
+                  <strong className={styles.username}>
+                    {review.userNameUser.fullName}
+                    <hr />
+                  </strong>
+                  <br />
+                  <p>
+                    <strong>Nota: </strong>
+                    {review.rating}
+                  </p>
+                  <p>{review.endDate}</p>
+                </div>
+                <p className={styles.comment}>{review.content}</p>
+              </div>
             ))}
           </ul>
         ) : (

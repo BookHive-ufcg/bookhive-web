@@ -6,6 +6,7 @@ import googleBooksService from "@/services/googleBooksService";
 import Title from "@/components/Title";
 import SearchBar from "@/components/SearchBar";
 import styles from "./search.module.css";
+import Image from "next/image";
 
 export default function Home() {
   const router = useRouter();
@@ -54,13 +55,15 @@ export default function Home() {
                     className={styles.bookCard}
                     onClick={() => handleChange(book.id)}
                   >
-                    <img
+                    <Image
                       src={
                         book.volumeInfo.imageLinks?.thumbnail ||
                         "/img/padrao.jpg"
                       }
                       alt={book.volumeInfo.title}
                       className={styles.bookCover}
+                      width={200}
+                      height={300}
                     />
                     <div className={styles.bookInfo}>
                       <h3 className={styles.bookTitle}>

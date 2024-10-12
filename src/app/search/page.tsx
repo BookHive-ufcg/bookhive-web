@@ -94,7 +94,7 @@ export default function Search() {
       <div className={styles.searchBarContainer}>
         <h1 className={styles.title}>Search books by genre</h1>
         <div className={styles.genreSearchContainer}>
-          <form onSubmit={handleSearch}>
+          <form onSubmit={handleSearch} className={styles.genreSearchForm}>
             <GenreInput
               label="Gênero Literário"
               genres={genres}
