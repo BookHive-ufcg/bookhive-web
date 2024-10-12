@@ -49,7 +49,7 @@ export default function Login() {
     });
 
     if (response.status === 404) {
-      setError("User not found");
+      setError("Usuário não encontrado");
       setLoading(false);
       return;
     }
@@ -60,7 +60,7 @@ export default function Login() {
       window.localStorage["isLoggedIn"] = true;
       window.localStorage["username"] = result.username;
     } else {
-      setError("Password is incorrect");
+      setError("Senha incorreta");
     }
 
     setLoading(false);
@@ -80,21 +80,21 @@ export default function Login() {
             />
           </div>
 
-          <p className={styles.description}>Join us and find your honeycomb</p>
+          <p className={styles.description}>Junte-se a nós e encontre sua colmeia de livros!</p>
         </div>
 
         <div className={styles.rightContainer}>
           <div className={styles.rightContent}>
-            <h1 className={styles.title}>Sign in to BookHive</h1>
-            <p className={styles.subTitle}>Use your username and password</p>
+            <h1 className={styles.title}>Entre no BookHive</h1>
+            <p className={styles.subTitle}>Use seu nome de usuário e senha</p>
             <form onSubmit={handleSubmit} className={styles.form}>
               <div className={styles.formGroup}>
                 <Input
                   type="text"
                   id="username"
                   name="username"
-                  placeholder="Username"
-                  label="Username"
+                  placeholder="Nome de usuário"
+                  label="Nome de usuário"
                   required
                 />
               </div>
@@ -103,14 +103,14 @@ export default function Login() {
                   type="password"
                   id="password"
                   name="password"
-                  placeholder="Password"
-                  label="Password"
+                  placeholder="Senha"
+                  label="Senha"
                   required
                 />
               </div>
 
               <a className={styles.forgotPassword} href="#">
-                Forgot your password?
+                Esqueceu sua senha?
               </a>
 
               <Button type="submit" className={styles.button}>
@@ -120,12 +120,12 @@ export default function Login() {
             </form>
 
             <div className={styles.separator}>
-              <span>New Here?</span>
+              <span>Novo por aqui?</span>
             </div>
 
             <Link href="/signup">
               <Button className={styles.button} variant="secondary">
-                Sign up
+                Cadastre-se
               </Button>
             </Link>
           </div>

@@ -36,13 +36,13 @@ export default function Home() {
     <main>
       <div className={styles.container}>
         <Title
-          titleText="Welcome to Bookhive!"
-          subTitleText={"Discover more about book's world"}
+          titleText="Bem-vindo ao Bookhive!"
+          subTitleText={"Descubra mais sobre o mundo dos livros"}
         />
 
         <div className={styles.searchBarContainer}>
           <SearchBar
-            placeholder="Title, author or ISBN"
+            placeholder="Título, autor ou ISBN"
             onSearch={handleSearch}
           />
 

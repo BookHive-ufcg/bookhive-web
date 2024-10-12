@@ -34,7 +34,7 @@ export default function Reviews() {
 
   return (
     <main>
-      <Title titleText="View Book" subTitleText="" />
+      <Title titleText="Sobre o livro" subTitleText="" />
       <div className={styles.container}>
         <img
           className={styles.image}
@@ -54,13 +54,13 @@ export default function Reviews() {
           className={styles.button}
           onClick={() => handleCreateReview("create")}
         >
-          Create review
+          Criar resenha
         </button>
         <button
           className={styles.button}
           onClick={() => handleCreateReview("see")}
         >
-          See review
+          Ver resenhas
         </button>
       </div>
     </main>

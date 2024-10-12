@@ -35,7 +35,7 @@ export default function CreateReview() {
     if (storedUsername) {
       setUsername(storedUsername);
     } else {
-      setError("User is not logged in.");
+      setError("Usuário não logado");
     }
   }, [router]);
 
@@ -54,7 +54,7 @@ export default function CreateReview() {
       !bookId ||
       !username
     ) {
-      setError("All fields are required.");
+      setError("Todos os campos são obrigatórios.");
       setLoading(false);
       return;
     }
@@ -81,14 +81,14 @@ export default function CreateReview() {
 
       if (response.ok) {
         // Exibe uma mensagem de sucesso e redireciona
-        alert("Review submitted successfully!");
+        alert("Resenha adicionada com sucesso!");
         router.push("/reviews/all"); // Redireciona para a página de reviews
       } else {
         const result = await response.json();
-        setError(result.message || "Failed to submit the review.");
+        setError(result.message || "Erro ao submeter a resenha.");
       }
     } catch (err) {
-      setError("An error occurred while submitting the review.");
+      setError("Um erro ocorreu ao submeter a resenha.");
     }
 
     setLoading(false);
@@ -96,7 +96,7 @@ export default function CreateReview() {
 
   return (
     <main>
-      <Title titleText="Review" subTitleText="Create the best review" />
+      <Title titleText="Resenha" subTitleText="Crie a melhor resenha" />
       <form onSubmit={handleSubmit} className={styles.form}>
         {/* Componente de avaliação */}
         <Animation
@@ -112,7 +112,7 @@ export default function CreateReview() {
 
         {/* Botão de submissão */}
         <button type="submit" className={styles.submit}>
-          {loading ? "Submitting..." : "Submit Review"}
+          {loading ? "Submetendo..." : "Submeter resenha"}
         </button>
 
         {/* Exibe erros, se houver */}

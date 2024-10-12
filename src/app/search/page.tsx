@@ -15,23 +15,23 @@ interface Book {
 
 export default function Search() {
   const [genres] = useState<string[]>([
-    "Fiction",
-    "Non-Fiction",
+    "Ficção",
+    "Não Ficção",
     "Romance",
-    "Mystery",
-    "Thriller",
-    "Fantasy",
-    "Science Fiction",
-    "Biography",
-    "History",
-    "Self-help",
-    "Children's",
-    "Young Adult",
-    "Horror",
-    "Adventure",
+    "Mistério",
+    "Suspense",
+    "Fantasia",
+    "Ficção Científica",
+    "Biografia",
+    "História",
+    "Autoajuda",
+    "Infantil",
+    "Jovem Adulto",
+    "Terror",
+    "Aventura",
     "Drama",
-    "Poetry",
-    "Action",
+    "Poesia",
+    "Ação",
   ]);
 
   const [selectedGenre, setSelectedGenre] = useState<string>("");
@@ -97,16 +97,16 @@ export default function Search() {
         <div className={styles.genreSearchContainer}>
           <form onSubmit={handleSearch}>
             <GenreInput
-              label="Genre"
+              label="Gênero Literário"
               genres={genres}
               onSelect={(genre: any) => setSelectedGenre(genre)}
-              placeholder="Book Genre"
+              placeholder="Gênero Literário"
             />
             <Input
               type="text"
               id="title"
-              placeholder="Book title"
-              label="Book Title"
+              placeholder="Título do Livro"
+              label="Título do Livro"
               value={bookTitle}
               onChange={handleTitleChange}
             />

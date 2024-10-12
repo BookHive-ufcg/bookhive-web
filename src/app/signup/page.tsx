@@ -42,10 +42,10 @@ export default function Signup() {
     });
 
     if (response.ok) {
-      alert("Signup successful!");
+      alert("Registrado com sucesso!");
       router.push("/login");
     } else {
-      setError("Signup failed");
+      setError("Erro ao registrar o usuário");
     }
 
     setLoading(false);
@@ -56,7 +56,7 @@ export default function Signup() {
       <div className={styles.signup}>
         <div className={styles.presentation}>
           <h1 className={styles.title}>
-            Signup,
+            Inscreva-se,
             <br />
             Bee a BookHiver!
           </h1>
@@ -67,44 +67,44 @@ export default function Signup() {
             type="text"
             id="firstName"
             name="firstName"
-            placeholder="First name"
-            label="First name"
+            placeholder="Primeiro nome"
+            label="Primeiro nome"
             required
           />
           <Input
             type="text"
             id="lastName"
             name="lastName"
-            placeholder="Last name"
-            label="Last name"
+            placeholder="Sobrenome"
+            label="Sobrenome"
             required
           />
           <Input
             type="date"
             id="dateOfBirth"
             name="dateOfBirth"
-            placeholder="Date of birth"
-            label="Date of birth"
+            placeholder="Data de nasscimento"
+            label="Data de nascimento"
             required
           />
           <Input
             type="text"
             id="username"
             name="username"
-            placeholder="Username"
-            label="Username"
+            placeholder="Nome de usuário"
+            label="Nome de usuário"
             required
           />
           <Input
             type="password"
             id="password"
             name="password"
-            placeholder="Password"
-            label="Password"
+            placeholder="Senha"
+            label="Senha"
             required
           />
           <Button type="submit" className={styles.button}>
-            {loading ? "Loading" : "Join us"}
+            {loading ? "Loading" : "Junte-se a nós"}
           </Button>
 
           {error && <p style={{ color: "red" }}>{error}</p>}

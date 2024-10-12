@@ -22,7 +22,7 @@ export default function ViewAllReviews() {
         try {
           const response = await fetch(`${url}/reviews/book/${parsedBook.id}`);
           if (!response.ok) {
-            throw new Error("Failed to fetch reviews");
+            throw new Error("Falha ao recuperar resenhas");
           }
           const data = await response.json();
           setReviews(data);
@@ -38,18 +38,18 @@ export default function ViewAllReviews() {
   }, []);
 
   if (loading) {
-    return <p>Loading book details...</p>;
+    return <p>Carregando detalhes do livro...</p>;
   }
 
   if (!book) {
-    return <p>No book selected.</p>;
+    return <p>Nenhum livro selecionado.</p>;
   }
 
   return (
     <main>
       <div>
         <Title
-          titleText={`Seeing reviews for ${book.volumeInfo.title}`}
+          titleText={`Resenhas de ${book.volumeInfo.title}`}
           subTitleText=""
         />
         {reviews.length > 0 ? (
@@ -63,7 +63,7 @@ export default function ViewAllReviews() {
             ))}
           </ul>
         ) : (
-          <p>No reviews found for this book.</p>
+          <p>Este livro ainda não possui resenhas.</p>
         )}
       </div>
     </main>
