@@ -11,7 +11,7 @@ const Coments = ({
   return (
     <div className={styles.comentsContainer}>
       <div className={styles.comentsFieldLabel}>
-        <label>What did you think about the book?</label>
+        <label>O que você achou do livro?</label>
         <input
           required
           type="text"

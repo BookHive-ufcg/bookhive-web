@@ -50,10 +50,10 @@ export default function Reviews() {
           />
           <div>
             <Button onClick={() => handleCreateReview("create")}>
-              Create review
+              Criar resenha
             </Button>
             <Button onClick={() => handleCreateReview("see")}>
-              See review
+              Ver resenhas
             </Button>
 
             <ul className={styles.infoList}>
