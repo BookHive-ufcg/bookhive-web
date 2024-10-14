@@ -92,7 +92,7 @@ export default function Search() {
   return (
     <main>
       <div className={styles.searchBarContainer}>
-        <h1 className={styles.title}>Search books by genre</h1>
+        <h1 className={styles.title}>Gere uma recomendação</h1>
         <div className={styles.genreSearchContainer}>
           <form onSubmit={handleSearch} className={styles.genreSearchForm}>
             <GenreInput
