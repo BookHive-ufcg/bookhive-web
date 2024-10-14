@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-
   images: {
-    domains: ["books.google.com"], 
+    unoptimized: true,
+    domains: ["books.google.com"],
   },
 };
 
