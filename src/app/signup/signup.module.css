@@ -23,3 +23,35 @@
   height: 4.1rem;
   align-self: flex-end;
 }
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+  .signup {
+    padding: 2rem;
+  }
+
+  .presentation {
+    height: 15vh;
+  }
+
+  .gridContainer {
+    grid-template-columns: auto auto; /* Reduz para 2 colunas */
+    grid-gap: 2rem 2.5rem;
+  }
+
+  .button {
+    align-self: center; /* Centraliza o botão */
+  }
+}
+
+@media (max-width: 480px) {
+  .gridContainer {
+    grid-template-columns: auto; /* Reduz para 1 coluna */
+    grid-gap: 1.5rem;
+  }
+
+  .button {
+    width: 100%; /* Botão ocupa toda a largura */
+    height: 3.5rem; /* Ajusta altura */
+  }
+}
