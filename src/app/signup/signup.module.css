@@ -1,3 +1,48 @@
+.profilephoto {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-color: #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  top: -350px;
+  left: 250px;
+
+}
+
+.fileinput {
+  display: none;
+}
+
+.placeholder {
+  font-size: 14px;
+  color: #555;
+  text-align: center;
+}
+
+.photolabel {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.profilephoto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+
 .signup {
   width: 100%;
   padding: 4rem;
@@ -55,3 +100,4 @@
     height: 3.5rem; /* Ajusta altura */
   }
 }
+
