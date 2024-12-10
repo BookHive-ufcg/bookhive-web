@@ -1,94 +1,71 @@
 .container {
-  padding: 2rem 0;
+  padding: 2rem 0; /* Adiciona mais espaço vertical */
+  margin: auto; /* Centraliza horizontalmente */
   width: 100%;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: flex-start; /* Alinha os itens no início */
+  min-height: 50vh; /* Garante altura mínima para o container */
 }
 
-.leftContainer {
-  width: 50%;
-}
-
-.leftContent {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.description {
-  margin-right: 10%;
-  text-align: right;
-  color: var(--font-color-secondary);
-  font-family: var(--font-secondary);
-  font-size: 1.35rem;
-}
-
+.leftContainer,
 .rightContainer {
   width: 50%;
 }
 
-.rightContent {
-  padding: 0 4rem;
-}
-
-.title {
-  font-size: 2.2rem;
-  text-transform: uppercase;
-}
-
-.subTitle {
-  font-size: 1.2rem;
-  color: var(--font-color-secondary);
-  font-family: var(--font-secondary);
-}
-
-.form {
-  margin: 3rem 0;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.formGroup {
-  margin-top: 1rem;
-}
-
-.forgotPassword {
-  color: var(--font-color-secondary);
-  text-decoration: none;
-  font-size: 0.8rem;
-  margin-left: auto;
-  font-family: var(--font-secondary);
-  font-size: 1.1rem;
-
-  &:hover {
-    text-decoration: underline;
+@media (min-width: 1024px) {
+  .container {
+    padding: 8rem 4rem; /* Aumenta o espaçamento em telas maiores */
   }
 }
 
-.button {
-  margin-top: 1.5rem;
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column; /* Empilha os containers */
+    align-items: center; /* Centraliza os elementos */
+    padding: 4rem 2rem; /* Ajusta o espaçamento */
+  }
+
+  .leftContainer,
+  .rightContainer {
+    width: 100%; /* Ocupa toda a largura */
+  }
+}
+
+.title {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 3rem; 
+}
+
+.description {
+  margin-right: 40%;
+  text-align: right;
+  color: var(--font-color-secondary);
+  font-family: var(--font-secondary);
+  font-size: 1.35rem;
+  margin-bottom: 2rem; 
+}
+
+.form {
+  margin: 1rem 0; /* Ajusta espaçamento vertical */
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* Aumenta o espaçamento entre campos */
 }
 
 .separator {
   display: flex;
   align-items: center;
   text-align: center;
-  margin-top: 4rem;
-  margin-bottom: 1rem;
-}
-
-.separator::before,
-.separator::after {
-  content: "";
-  flex: 1;
-  border-bottom: 1px solid var(--color-grey);
+  margin: 3rem 0; /* Adiciona mais espaço acima e abaixo */
 }
 
 .separator span {
-  padding: 0 10px;
-  color: var(--color-grey);
-  font-size: 22px;
-  font-family: var(--font-secondary);
-  font-size: 1.4rem;
+  font-size: 1.6rem;
+}
+
+.logo {
+ margin-left: 5%;
 }
