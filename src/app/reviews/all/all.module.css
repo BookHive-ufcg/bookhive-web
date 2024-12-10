@@ -17,7 +17,9 @@
   border-radius: 10px;
   background-color: white;
   display: flex;
-  height: 10rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+  height: auto;
 }
 
 .username {
@@ -28,4 +30,38 @@
   color: #555;
   font-size: 0.8rem;
   width: 40rem;
+  word-wrap: break-word;
+}
+
+@media (max-width: 768px) {
+  .reviewItem {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .userData {
+    width: 100%;
+  }
+
+  .comment {
+    width: 100%;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .reviewItem {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.8rem;
+  }
+
+  .userData {
+    width: 100%;
+  }
+
+  .comment {
+    width: 100%;
+    font-size: 0.8rem;
+  }
 }

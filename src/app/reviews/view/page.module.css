@@ -3,21 +3,28 @@
   flex-direction: column;
   width: min(40rem, 90%);
   margin-bottom: 10rem;
+  padding: 0 1rem;
 }
 
 .rowOne {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
 }
 
 .rowOne > div {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  flex: 1 1 calc(50% - 0.5rem);
+  min-width: 150px;
 }
 
 .rowOne > div > button {
   height: 3rem;
+  width: 100%;
 }
 
 .listItem {
@@ -25,10 +32,6 @@
   font-family: var(--font-secondary);
   color: var(--font-color-secondary);
   margin-bottom: 2px;
-}
-
-.listItem span {
-  font-weight: bold;
 }
 
 .button {
@@ -42,4 +45,60 @@
 
 .description {
   font-family: var(--font-secondary);
+}
+
+.centerImage {
+  padding-left: 3.5rem;
+}
+
+@media (min-width: 768px) {
+  .rowOne {
+    align-items: center;
+  }
+  .centerImage {
+    padding-left: 7.5rem;
+    width: 500px;
+    height: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    margin-bottom: 5rem;
+  }
+
+  .rowOne {
+    flex-direction: column;
+  }
+
+  .rowOne > div {
+    flex: 1 1 auto;
+    gap: 0.5rem;
+  }
+
+  .listItem {
+    font-size: 0.9rem;
+  }
+
+  .descriptionTitle {
+    margin: 2rem 0 0.5rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    width: 100%;
+  }
+
+  .descriptionTitle {
+    font-size: 1rem;
+  }
+
+  .rowOne > div {
+    gap: 0.5rem;
+  }
+
+  .rowOne > div > button {
+    height: 2.5rem;
+  }
 }

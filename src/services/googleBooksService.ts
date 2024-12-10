@@ -4,20 +4,25 @@ const googleBooksApi = axios.create({
   baseURL: "https://www.googleapis.com/books/v1",
 });
 
+googleBooksApi.interceptors.request.use((config) => {
+  config.params = config.params || {};
+  config.params.key = process.env.NEXT_PUBLIC_API_KEY;
+  return config;
+});
+
 const googleBooksService = {
   searchBooks: async (query: string) => {
-    const queryParams = new URLSearchParams({ q: query });
-    queryParams.set("orderBy", "relevance");
-    queryParams.set("key", String(process.env.NEXT_PUBLIC_API_KEY));
-    queryParams.set("maxResults", "40");
-
     try {
-      const response = await googleBooksApi.get(
-        `/volumes?${queryParams.toString()}`
-      );
+      const response = await googleBooksApi.get("/volumes", {
+        params: {
+          q: query,
+          orderBy: "relevance",
+          maxResults: 40,
+        },
+      });
       return response.data;
-    } catch (res: any) {
-      return Promise.reject(res.data);
+    } catch (error) {
+      return handleApiError(error);
     }
   },
 
@@ -26,28 +31,33 @@ const googleBooksService = {
       const response = await googleBooksApi.get(`/volumes/${id}`);
       return response.data;
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        console.error("Erro ao obter o livro:", error);
-        return Promise.reject(
-          error.response ? error.response.data : error.message
-        );
-      } else {
-        console.error("Erro inesperado:", error);
-        return Promise.reject("Erro inesperado ao obter o livro");
-      }
+      return handleApiError(error);
     }
   },
 
   getBookByIsbn: async (isbn: string) => {
     try {
-      const response = await googleBooksApi.get(
-        `/volumes?q=isbn:${isbn}&key=${process.env.NEXT_PUBLIC_API_KEY}`
-      );
+      const response = await googleBooksApi.get("/volumes", {
+        params: {
+          q: `isbn:${isbn}`,
+        },
+      });
       return response.data;
-    } catch (res: any) {
-      return Promise.reject(res.data);
+    } catch (error) {
+      return handleApiError(error);
     }
   },
 };
+
+// Função genérica para tratar erros
+function handleApiError(error: unknown): Promise<never> {
+  if (axios.isAxiosError(error)) {
+    console.error("Erro na API:", error.response || error.message);
+    return Promise.reject(error.response ? error.response.data : error.message);
+  } else {
+    console.error("Erro inesperado:", error);
+    return Promise.reject("Erro inesperado");
+  }
+}
 
 export default googleBooksService;

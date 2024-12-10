@@ -47,6 +47,7 @@ export default function Reviews() {
             alt={book.volumeInfo.title}
             width={300}
             height={400}
+            className={styles.centerImage}
           />
           <div>
             <Button onClick={() => handleCreateReview("create")}>

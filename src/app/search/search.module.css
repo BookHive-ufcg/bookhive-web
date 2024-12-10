@@ -204,3 +204,91 @@
     #0056b3
   ); /* Cor do botão ao passar o mouse */
 }
+
+/* Responsividade adicional */
+@media (max-width: 1024px) {
+  .searchBarContainer {
+    width: 90%; /* Ocupa mais espaço em telas menores */
+    padding-bottom: 6rem;
+  }
+
+  .genresList {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem 0;
+  }
+
+  .buttonContainer {
+    justify-content: center; /* Centraliza o botão em telas médias */
+  }
+
+  .modalContent {
+    padding: 15px;
+    width: 90%; /* Usa mais largura em tablets */
+  }
+}
+
+@media (max-width: 768px) {
+  .searchBarContainer {
+    width: 95%; /* Ajusta para dispositivos móveis */
+  }
+
+  .title {
+    font-size: 2rem; /* Reduz tamanho da fonte */
+  }
+
+  .genresList {
+    grid-template-columns: repeat(2, 1fr); /* Apenas 2 colunas */
+  }
+
+  .genreSearchForm {
+    gap: 1rem; /* Reduz espaçamento */
+  }
+
+  .modalContent {
+    max-width: 95%; /* Modal mais compacto */
+    padding: 10px;
+  }
+
+  .buttonContainer button {
+    padding: 12px; /* Botões mais fáceis de tocar */
+  }
+
+  .bookGrid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 1rem;
+  }
+
+  .bookCover {
+    height: 150px; /* Imagem menor */
+  }
+
+  .bookInfo {
+    padding: 0.5rem;
+  }
+
+  .bookTitle {
+    font-size: 0.9rem; /* Fonte menor */
+  }
+
+  .bookAuthor {
+    font-size: 0.8rem; /* Fonte menor */
+  }
+}
+
+@media (max-width: 480px) {
+  .genresList {
+    grid-template-columns: 1fr; /* Uma coluna */
+  }
+
+  .title {
+    font-size: 1.5rem; /* Fonte menor para telas muito pequenas */
+  }
+
+  .modalContent {
+    max-width: 90%;
+  }
+
+  .bookCard {
+    box-shadow: none; /* Remove sombra para simplificar visualização */
+  }
+}

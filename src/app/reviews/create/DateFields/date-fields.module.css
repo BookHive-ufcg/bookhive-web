@@ -41,24 +41,40 @@
   color: #aaa;
 }
 
-@media (max-width: 1200px) {
+/* Responsividade para tablets */
+@media (max-width: 768px) {
   .dateFieldsContainer {
     padding: 15px;
     top: 130px;
+    left: 10px;
+    width: 100%;
   }
 
   .dateFieldInput {
     font-size: 0.8rem;
+    width: 100%;
+  }
+
+  .dateFieldLabel {
+    font-size: 20px;
   }
 }
 
+/* Responsividade para celulares */
 @media (max-width: 480px) {
   .dateFieldsContainer {
     padding: 10px;
     top: 100px;
+    left: 10px;
+    width: 100%;
   }
 
   .dateFieldInput {
     font-size: 0.75rem;
+    width: 100%;
+  }
+
+  .dateFieldLabel {
+    font-size: 16px;
   }
 }
