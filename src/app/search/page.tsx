@@ -64,6 +64,10 @@ export default function Search() {
         }
       );
 
+      if (!response.ok) {
+        throw new Error(`Erro ao buscar livros: ${response.status}`);
+      }
+
       const text = await response.text();
 
       let data;
@@ -71,7 +75,8 @@ export default function Search() {
         data = JSON.parse(text);
       } catch (parseError) {
         setShowModal(true);
-        setSelectedBook(text);
+        setSelectedBook("Erro ao interpretar os dados da resposta.");
+        console.error("Erro ao interpretar os dados da resposta:", parseError);
         return;
       }
 
@@ -83,9 +88,12 @@ export default function Search() {
         setSelectedBook("Nenhum livro encontrado.");
       }
     } catch (error) {
-      console.error("Error searching books:", error);
+      // Tratamento de erro para erros como 400, 404, ou outros
+      console.error("Erro ao buscar livros:", error);
       setShowModal(true);
-      setSelectedBook("Ocorreu um erro ao buscar os livros.");
+      setSelectedBook(
+        error instanceof Error ? error.message : "Ocorreu um erro desconhecido."
+      );
     }
   };
 
@@ -123,7 +131,12 @@ export default function Search() {
                   ? selectedBook
                   : `Título: ${selectedBook?.title}, Autor: ${selectedBook?.author}`}
               </p>
-              <button onClick={() => setShowModal(false)}>Fechar</button>
+              <button
+                onClick={() => setShowModal(false)}
+                className={styles.closeButton}
+              >
+                Fechar
+              </button>
             </div>
           </div>
         )}
