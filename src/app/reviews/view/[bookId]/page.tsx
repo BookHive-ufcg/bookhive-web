@@ -1,23 +1,20 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter, useParams } from "next/navigation";
 import styles from "./page.module.css";
 import Title from "@/components/Title";
-import { useRouter } from "next/navigation";
 import Button from "@/components/Button";
 import Image from "next/image";
+import googleBooksService from "@/services/googleBooksService";
 
 export default function Reviews() {
   const [book, setBook] = useState<any>(null);
-  const router = useRouter();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const storedBook = localStorage.getItem("selectedBook");
-    // console.log(storedBook);
-    if (storedBook) {
-      setBook(JSON.parse(storedBook));
-    }
-  }, []);
+  const { bookId } = useParams();
+  const router = useRouter();
 
   const handleCreateReview = (type: string) => {
     if (book) {
@@ -25,13 +22,42 @@ export default function Reviews() {
       if (type === "create") {
         router.push("/reviews/create");
       } else {
-        router.push("/reviews/all");
+        router.push(`/reviews/all/${book.id}`);
       }
     }
   };
 
-  if (!book) {
-    return <p>Loading book details...</p>;
+  useEffect(() => {
+    if (!bookId || Array.isArray(bookId)) {
+      setError("ID do livro inválido.");
+      setLoading(false);
+      return;
+    }
+
+    googleBooksService
+      .getBookById(bookId)
+      .then((data) => {
+        if (!data) {
+          setError("Livro não encontrado.");
+          setLoading(false);
+          return;
+        }
+        setBook(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError("Erro ao carregar detalhes do livro.");
+        console.error(err);
+        setLoading(false);
+      });
+  }, [bookId]);
+
+  if (loading) {
+    return <p>Carregando detalhes do livro...</p>;
+  }
+
+  if (error) {
+    return <p>{error}</p>;
   }
 
   return (
@@ -43,7 +69,7 @@ export default function Reviews() {
         />
         <div className={styles.rowOne}>
           <Image
-            src={book.volumeInfo.imageLinks?.medium || "/img/padrao.jpg"}
+            src={book.volumeInfo.imageLinks?.thumbnail || "/img/padrao.jpg"}
             alt={book.volumeInfo.title}
             width={300}
             height={400}
@@ -63,7 +89,7 @@ export default function Reviews() {
                 {book.volumeInfo.publisher}
               </li>
               <li className={styles.listItem}>
-                <span>Publicação: </span>
+                <span>Publicação: </span>
                 {book.volumeInfo.publishedDate}
               </li>
               <li className={styles.listItem}>

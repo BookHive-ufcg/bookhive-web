@@ -2,6 +2,7 @@
 
 import Title from "@/components/Title";
 import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
 import styles from "./all.module.css";
 
 const url = String(process.env.NEXT_PUBLIC_BACK_END_URL);
@@ -11,47 +12,45 @@ export default function ViewAllReviews() {
   const [reviews, setReviews] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const { bookId } = useParams();
+
   useEffect(() => {
-    const storedBook = localStorage.getItem("selectedBook");
-
-    if (storedBook) {
-      const parsedBook = JSON.parse(storedBook);
-      setBook(parsedBook);
-
-      const fetchReviews = async () => {
-        try {
-          const response = await fetch(`${url}/reviews/book/${parsedBook.id}`);
-          if (!response.ok) {
-            throw new Error("Falha ao recuperar resenhas");
-          }
-          const data = await response.json();
-          setReviews(data);
-        } catch (error) {
-          console.error("Error fetching reviews:", error);
-        } finally {
-          setLoading(false);
-        }
-      };
-
-      fetchReviews();
+    if (!bookId) {
+      setLoading(false); // Mesmo sem ID, o design carrega vazio.
+      return;
     }
-  }, []);
+
+    const fetchBookAndReviews = async () => {
+      try {
+        const bookResponse = await fetch(`${url}/books/${bookId}`);
+        const bookData = bookResponse.ok ? await bookResponse.json() : null;
+        setBook(bookData);
+
+        const reviewsResponse = await fetch(`${url}/reviews/book/${bookId}`);
+        const reviewsData = reviewsResponse.ok
+          ? await reviewsResponse.json()
+          : [];
+        setReviews(reviewsData);
+      } catch {
+        // Falhas serão silenciosas, para não interromper o design.
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBookAndReviews();
+  }, [bookId]);
 
   if (loading) {
     return <p>Carregando detalhes do livro...</p>;
   }
 
-  if (!book) {
-    return <p>Nenhum livro selecionado.</p>;
-  }
-
-  console.log(reviews);
-
   return (
     <main>
       <div>
+        {/* Se os detalhes do livro estiverem ausentes, renderiza um título padrão */}
         <Title
-          titleText={`Resenhas de ${book.volumeInfo.title}`}
+          titleText={book?.volumeInfo?.title || "Detalhes do Livro"}
           subTitleText=""
         />
         {reviews.length > 0 ? (
@@ -63,7 +62,6 @@ export default function ViewAllReviews() {
                     {review.userNameUser.fullName}
                     <hr />
                   </strong>
-                  <br />
                   <p>
                     <strong>Nota: </strong>
                     {review.rating}

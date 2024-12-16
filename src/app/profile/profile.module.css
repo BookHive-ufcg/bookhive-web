@@ -1,39 +1,49 @@
 .profileContainer {
-  margin: 3rem 0 6rem 0;
-  width: 80%;
+  margin: 2rem auto;
+  width: 90%; /* Ajuste geral para dispositivos menores */
+  max-width: 1200px; /* Limite de largura para telas maiores */
 }
 
 .profileImage {
   border-radius: 50%;
+  width: 120px; /* Ajuste para telas menores */
+  height: 120px;
+  object-fit: cover;
 }
 
 .userName {
   font-size: 1.5rem;
   font-weight: bold;
-  margin: 5px 0;
+  margin: 10px 0;
+  text-align: center;
 }
 
 .publications {
-  font-size: 1.5rem;
-  margin: 5px 0;
+  font-size: 1.3rem;
+  margin: 10px 0;
   color: #666;
+  text-align: center;
 }
 
 .userBio {
-  font-size: 2rem;
+  font-size: 1.1rem;
   color: #666;
+  text-align: justify;
+  margin: 0 1rem;
 }
 
 .reviewsTitle {
   font-size: 1.5rem;
   margin-top: 15px;
+  text-align: center;
 }
 
 .reviewsList {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 2rem;
+  gap: 1.5rem;
+  justify-content: center; /* Alinha itens centralmente */
   margin-bottom: 15px;
 }
 
@@ -45,7 +55,8 @@
   border-radius: 0.625rem;
   box-shadow: 0 0.375rem 0.75rem rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  width: 30rem;
+  width: 90%; /* Ocupa maior parte da tela */
+  max-width: 400px; /* Limita a largura em telas grandes */
   padding: 0.5rem;
   box-sizing: border-box;
 }
@@ -83,20 +94,50 @@
   color: #333;
 }
 
-@media (max-width: 1500px) {
-  .bookDetails {
-    width: 900px;
-  }
-}
-
+/* Estilos para tablets (768px ou menos) */
 @media (max-width: 768px) {
-  .bookDetails {
-    width: 180px;
+  .profileImage {
+    width: 100px;
+    height: 100px;
+  }
+
+  .userName {
+    font-size: 1.3rem;
+  }
+
+  .userBio {
+    font-size: 1rem;
+    margin: 0 0.5rem;
+  }
+
+  .reviewItem {
+    width: 100%;
+    max-width: 350px;
   }
 }
 
+/* Estilos para celulares (480px ou menos) */
 @media (max-width: 480px) {
-  .bookDetails {
+  .profileImage {
+    width: 80px;
+    height: 80px;
+  }
+
+  .userName {
+    font-size: 1.2rem;
+  }
+
+  .publications,
+  .userBio {
+    font-size: 0.95rem;
+  }
+
+  .reviewsList {
+    gap: 1rem;
+  }
+
+  .reviewItem {
     width: 100%;
+    max-width: 300px;
   }
 }
