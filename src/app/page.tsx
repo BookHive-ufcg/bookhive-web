@@ -21,14 +21,12 @@ export default function Home() {
     }
   };
 
-  const handleChange = async (id: string) => {
-    try {
-      const book = await googleBooksService.getBookById(id);
-      localStorage.setItem("selectedBook", JSON.stringify(book));
-      router.push("/reviews/view");
-    } catch (error) {
-      console.error("Error fetching book details:", error);
+  const handleBookClick = (bookId: string | undefined) => {
+    if (!bookId) {
+      console.error("Book ID is undefined.");
+      return;
     }
+    router.push(`/reviews/view/${bookId}`);
   };
 
   return (
@@ -36,7 +34,7 @@ export default function Home() {
       <div className={styles.container}>
         <Title
           titleText="Bem-vindo ao Bookhive!"
-          subTitleText={"Descubra mais sobre o mundo dos livros"}
+          subTitleText="Descubra mais sobre o mundo dos livros"
         />
 
         <div className={styles.searchBarContainer}>
@@ -47,30 +45,31 @@ export default function Home() {
 
           {searchResults.length > 0 && (
             <div className={styles.searchResults}>
-              <h2 className={styles.searchResultsTitle}>Search Results</h2>
+              <h2 className={styles.searchResultsTitle}>Resultados da Busca</h2>
               <div className={styles.bookGrid}>
                 {searchResults.map((book: any) => (
                   <div
                     key={book.id}
                     className={styles.bookCard}
-                    onClick={() => handleChange(book.id)}
+                    onClick={() => handleBookClick(book.id)}
                   >
                     <Image
                       src={
-                        book.volumeInfo.imageLinks?.thumbnail ||
+                        book.volumeInfo?.imageLinks?.thumbnail ||
                         "/img/padrao.jpg"
                       }
-                      alt={book.volumeInfo.title}
+                      alt={book.volumeInfo?.title || "Capa do livro"}
                       className={styles.bookCover}
                       width={200}
                       height={300}
                     />
                     <div className={styles.bookInfo}>
                       <h3 className={styles.bookTitle}>
-                        {book.volumeInfo.title}
+                        {book.volumeInfo?.title || "Título indisponível"}
                       </h3>
                       <p className={styles.bookAuthor}>
-                        {book.volumeInfo.authors?.join(", ")}
+                        {book.volumeInfo?.authors?.join(", ") ||
+                          "Autor desconhecido"}
                       </p>
                     </div>
                   </div>
