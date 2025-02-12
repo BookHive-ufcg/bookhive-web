@@ -31,7 +31,7 @@ export default function Profile() {
   });
   const [reviews, setReviews] = useState<Review[]>([]);
   const [bookDetails, setBookDetails] = useState<Record<string, BookDetail>>(
-    {}
+    {},
   );
 
   useEffect(() => {
