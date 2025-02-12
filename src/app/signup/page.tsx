@@ -5,14 +5,15 @@ import styles from "./signup.module.css";
 import Button from "@/components/Button";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";  // Importando o componente Image
+import Image from "next/image";
 
 const url = String(process.env.NEXT_PUBLIC_BACK_END_URL);
 
 export default function Signup() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [image, setImage] = useState<string | null>(null);  // Adiciona o estado para a imagem
+  const [image, setImage] = useState<string | null>(null);
+  const [imageFile, setImageFile] = useState<File | null>(null);
   const router = useRouter();
 
   if (
@@ -23,15 +24,15 @@ export default function Signup() {
     return null;
   }
 
-  // Função para lidar com o upload da imagem
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0]; // Verifica se um arquivo foi selecionado
+    const file = event.target.files?.[0];
     if (file) {
+      setImageFile(file); // Guarda o arquivo para envio posterior
       const reader = new FileReader();
       reader.onloadend = () => {
-        setImage(reader.result as string);  // Armazena a URL da imagem no estado
+        setImage(reader.result as string);
       };
-      reader.readAsDataURL(file);  // Lê o arquivo como Data URL
+      reader.readAsDataURL(file);
     }
   };
 
@@ -40,29 +41,47 @@ export default function Signup() {
     setLoading(true);
     setError(null);
 
-    const formData = new FormData(event.currentTarget);
+    const formElement = event.currentTarget;
+    const formData = new FormData(formElement);
 
-    const data: Record<string, string> = {};
-    formData.forEach((value, key) => {
-      data[key] = value.toString();
-    });
+    // Criar objeto com os dados do usuário
+    const userData = {
+      firstName: formData.get("firstName"),
+      lastName: formData.get("lastName"),
+      dateOfBirth: formData.get("dateOfBirth"),
+      username: formData.get("username"),
+      password: formData.get("password"),
+    };
 
-    const response = await fetch(`${url}/user`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
+    // Criar novo FormData para envio
+    const sendFormData = new FormData();
 
-    if (response.ok) {
-      alert("Registrado com sucesso!");
-      router.push("/login");
-    } else {
-      setError("Erro ao registrar o usuário");
+    // Adicionar os dados do usuário como JSON string
+    sendFormData.append("userDTO", JSON.stringify(userData));
+
+    // Adicionar a foto se existir
+    if (imageFile) {
+      sendFormData.append("profilePicture", imageFile);
     }
 
-    setLoading(false);
+    try {
+      const response = await fetch(`${url}/user`, {
+        method: "POST",
+        body: sendFormData, // O Content-Type será automaticamente definido como multipart/form-data
+      });
+
+      if (response.ok) {
+        alert("Registrado com sucesso!");
+        router.push("/login");
+      } else {
+        const errorData = await response.json();
+        setError(errorData.message || "Erro ao registrar o usuário");
+      }
+    } catch (err) {
+      setError("Erro ao conectar com o servidor");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -118,15 +137,14 @@ export default function Signup() {
             required
           />
 
-          
           <div className={styles.profilephoto}>
             {image ? (
-              <Image 
-                src={image} 
-                alt="Profile" 
-                width={100} 
-                height={100} 
-                className={styles.profileimage} 
+              <Image
+                src={image}
+                alt="Profile"
+                width={100}
+                height={100}
+                className={styles.profileimage}
               />
             ) : (
               <div className={styles.placeholder}>Upload Photo</div>
@@ -138,7 +156,8 @@ export default function Signup() {
                 name="profilephoto"
                 className={styles.fileinput}
                 label=""
-                onChange={handleFileChange}  
+                onChange={handleFileChange}
+                accept="image/*"
               />
             </label>
           </div>
