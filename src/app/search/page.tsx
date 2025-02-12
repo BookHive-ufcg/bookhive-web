@@ -48,7 +48,7 @@ export default function Search() {
     if (!selectedGenre || !bookTitle) {
       setShowModal(true);
       setSelectedBook(
-        "Por favor, insira tanto o gênero quanto o título do livro."
+        "Por favor, insira tanto o gênero quanto o título do livro.",
       );
       return;
     }
@@ -58,10 +58,7 @@ export default function Search() {
         `${url}/recommend/${selectedGenre}/${bookTitle}`,
         {
           method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
+        },
       );
 
       if (!response.ok) {
@@ -70,18 +67,8 @@ export default function Search() {
 
       const text = await response.text();
 
-      let data;
-      try {
-        data = JSON.parse(text);
-      } catch (parseError) {
-        setShowModal(true);
-        setSelectedBook("Erro ao interpretar os dados da resposta.");
-        console.error("Erro ao interpretar os dados da resposta:", parseError);
-        return;
-      }
-
-      if (data.items && data.items.length > 0) {
-        setSelectedBook(data.items[0]);
+      if (text != "") {
+        setSelectedBook(text);
         setShowModal(true);
       } else {
         setShowModal(true);
@@ -92,7 +79,9 @@ export default function Search() {
       console.error("Erro ao buscar livros:", error);
       setShowModal(true);
       setSelectedBook(
-        error instanceof Error ? error.message : "Ocorreu um erro desconhecido."
+        error instanceof Error
+          ? error.message
+          : "Ocorreu um erro desconhecido.",
       );
     }
   };
