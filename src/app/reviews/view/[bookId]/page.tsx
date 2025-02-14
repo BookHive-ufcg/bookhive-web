@@ -26,7 +26,7 @@ export default function Reviews() {
       localStorage.setItem("bookIdForReview", book.id);
       router.push("/reviews/create");
     } else {
-      router.push(`/reviews/book/${book.id}`);
+      router.push(`/reviews/all/${book.id}`);
     }
   };
 
