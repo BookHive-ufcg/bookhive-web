@@ -21,10 +21,11 @@ export default function CreateReview() {
   const [username, setUsername] = useState<string | null>(null);
   const router = useRouter();
 
-  // Recupera o ID do livro e o nome de usuário do localStorage
   useEffect(() => {
     const storedBookId = localStorage.getItem("bookIdForReview");
     const storedUsername = localStorage.getItem("username");
+
+    console.log(storedBookId);
 
     if (storedBookId) {
       setBookId(storedBookId);
@@ -39,13 +40,11 @@ export default function CreateReview() {
     }
   }, [router]);
 
-  // Função de submissão do formulário
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true);
     setError(null);
 
-    // Verificação de campos obrigatórios
     if (
       !selectedRating ||
       !startDate ||
@@ -59,7 +58,6 @@ export default function CreateReview() {
       return;
     }
 
-    // Dados a serem enviados na requisição
     const reviewData = {
       bookIsbn: bookId,
       usernameUser: username,
@@ -67,7 +65,7 @@ export default function CreateReview() {
       endDate,
       rating: selectedRating,
       content: comment,
-      id: username + Date.now().toString(), // Gera um ID único
+      id: username + Date.now().toString(),
     };
 
     try {
@@ -79,10 +77,11 @@ export default function CreateReview() {
         body: JSON.stringify(reviewData),
       });
 
+      console.log(reviewData, "shsuhs");
+
       if (response.ok) {
-        // Exibe uma mensagem de sucesso e redireciona
         alert("Resenha adicionada com sucesso!");
-        router.push("/reviews/all"); // Redireciona para a página de reviews
+        router.push(`/reviews/all/${bookId}`);
       } else {
         const result = await response.json();
         setError(result.message || "Erro ao submeter a resenha.");
@@ -98,24 +97,15 @@ export default function CreateReview() {
     <main>
       <Title titleText="Resenha" subTitleText="Crie a melhor resenha" />
       <form onSubmit={handleSubmit} className={styles.form}>
-        {/* Componente de avaliação */}
         <Animation
           selectedRating={selectedRating}
           setSelectedRating={setSelectedRating}
         />
-
-        {/* Campos de data */}
         <DateFields setStartDate={setStartDate} setEndDate={setEndDate} />
-
-        {/* Campo de comentários */}
         <Coments comment={comment} setComment={setComment} />
-
-        {/* Botão de submissão */}
         <button type="submit" className={styles.submit}>
           {loading ? "Submetendo..." : "Submeter resenha"}
         </button>
-
-        {/* Exibe erros, se houver */}
         {error && <p className={styles.error}>{error}</p>}
       </form>
     </main>

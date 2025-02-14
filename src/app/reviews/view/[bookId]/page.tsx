@@ -22,6 +22,7 @@ export default function Reviews() {
       if (type === "create") {
         router.push("/reviews/create");
       } else {
+        console.log(book.id, "meu id book");
         router.push(`/reviews/all/${book.id}`);
       }
     }
