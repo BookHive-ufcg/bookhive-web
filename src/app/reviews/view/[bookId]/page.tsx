@@ -17,20 +17,22 @@ export default function Reviews() {
   const router = useRouter();
 
   const handleCreateReview = (type: string) => {
-    if (book) {
+    if (!book?.id) {
+      console.error("ID do livro não encontrado!");
+      return;
+    }
+
+    if (type === "create") {
       localStorage.setItem("bookIdForReview", book.id);
-      if (type === "create") {
-        router.push("/reviews/create");
-      } else {
-        console.log(book.id, "meu id book");
-        router.push(`/reviews/all/${book.id}`);
-      }
+      router.push("/reviews/create");
+    } else {
+      router.push(`/reviews/book/${book.id}`);
     }
   };
 
   useEffect(() => {
     if (!bookId || Array.isArray(bookId)) {
-      setError("ID do livro inválido.");
+      setError("ID do livro inválido!");
       setLoading(false);
       return;
     }
